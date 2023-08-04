@@ -9,22 +9,22 @@ export const Navigator = () => {
         firstButton: {
             name: 'Search',
             screenName: 'ScenicScreen',
-            imgSrc: '../src/assets/images/search-icon.svg',
+            imgSrc: './search-icon.svg',
         },
         secondButton: {
             name: 'Inventory',
             screenName: 'Inventory',
-            imgSrc: '../src/assets/images/inventory-icon.svg',
+            imgSrc: './inventory-icon.svg',
         },
         thirdButton: {
             name: '???',
             screenName: '???',
-            imgSrc: '../src/assets/images/question-icon.svg',
+            imgSrc: './question-icon.svg',
         },
         fourthButton: {
             name: '????',
             screenName: '????',
-            imgSrc: '../src/assets/images/question-icon.svg',
+            imgSrc: './question-icon.svg',
         }
     }
 
