@@ -19,13 +19,15 @@ export const AvailableEnemies = {
                         effect: attack.effect,
                         name: 'Tackle',
                         class: 'physical',
-                        range: 'close'
+                        range: 'close',
+                        damage: 1
                     },
                     acidSpit: {
                         effect: attack.effect,
                         name: 'Acid Shot',
                         class: 'physical',
-                        range: 'long'
+                        range: 'long',
+                        damage: 1
                     }
                 },
                 prompt: 'As you prance calmly through the forest, your foot gets stuck on a slimy, sticky substance. You look around, and a bouncing liquid sphere is moving towards you. Slowly. Very slowly.',
@@ -46,13 +48,15 @@ export const AvailableEnemies = {
                         effect: attack.effect,
                         name: 'Club',
                         range: 'close',
-                        class: 'physical'
+                        class: 'physical',
+                        damage: 2
                     },
                     bite: {
                         effect: attack.effect,
                         name: 'Bite',
                         range: 'close',
-                        class: 'physical'
+                        class: 'physical',
+                        damage: 1
                     }
                 },
                 prompt: 'Warty, ugly and pig-like, a small figure makes its way towards you with a slimy grin. It seems like you cannot talk it out of this.',
@@ -73,13 +77,15 @@ export const AvailableEnemies = {
                     scratch: {
                         effect: attack.effect,
                         name: 'Scratch',
-                        range: 'close'
+                        range: 'close',
+                        damage: 1
                     },
                     bite: {
                         effect: attack.effect,
                         name: 'Bite',
                         range: 'close',
-                        class: 'physical'
+                        class: 'physical',
+                        damage: 1
                     }
                 },
                 prompt: "A swing of the vines and a small shadow lands in front of you. It opens it's mouth to bare a set of horrifying teeth, and approaches you with ill intent, screaming.",
@@ -100,13 +106,15 @@ export const AvailableEnemies = {
                         effect: attack.effect,
                         name: 'Tackle',
                         range: 'close',
-                        class: 'physical'
+                        class: 'physical',
+                        damage: 1
                     },
                     kick: {
                         effect: attack.effect,
                         name: 'kick',
                         range: 'close',
-                        class: 'physical'
+                        class: 'physical',
+                        damage: 1
                     }
                 },
                 prompt: 'A rumbling calls your attention soon enough, and you manage to dodge out of the way as a massive animal hurls all of its weight towards you. It turns around, looking at you with a fierce intent.',
@@ -128,13 +136,15 @@ export const AvailableEnemies = {
                         effect: attack.effect,
                         name: 'Tackle',
                         range: 'close',
-                        class: 'physical'
+                        class: 'physical',
+                        damage: 1
                     },
                     kick: {
                         effect: attack.effect,
                         name: 'kick',
                         range: 'close',
-                        class: 'physical'
+                        class: 'physical',
+                        damage: 1
                     }
                 },
                 prompt: 'You set your eyes on the distance and see a large patch of brown. As you walk closer, you notice a pair of antlers that raise in response to your sudden arrival.',
@@ -155,13 +165,15 @@ export const AvailableEnemies = {
                         effect: attack.effect,
                         name: 'Bite',
                         range: 'close',
-                        class: 'physical'
+                        class: 'physical',
+                        damage: 1
                     },
                     scratch: {
                         effect: attack.effect,
                         name: 'Scratch',
                         range: 'close',
-                        class: 'physical'
+                        class: 'physical',
+                        damage: 1
                     }
                 },
                 prompt: 'The sudden sound of a howling beast makes your hairs stand on end. Fearing the worst you look around you, and as expected, gaze upon a single, small wolf baring its fangs at you.',
@@ -183,20 +195,22 @@ export const AvailableEnemies = {
                         effect: attack.effect,
                         name: 'Whip',
                         range: 'long',
-                        class: 'physical'
+                        class: 'physical',
+                        damage: 2
                     },
                     scratch: {
                         effect: attack.effect,
                         name: 'Scratch',
                         range: 'close',
-                        class: 'physical'
+                        class: 'physical',
+                        damage: 1
                     }
                 },
                 prompt: "You go in to collect a few hanging berrires, but your hand is met by a ferocious slap. Uncapable of understanding what's going on, you have no choice but to fight as the bush begins moving.",
                 name: 'Living Shrub',
                 drops: {
                     stick: oneStar.general.stick,
-                    handfulOfLeaves: oneStar.general.handfulOfLeaves
+                    leavesHandful: oneStar.general.leavesHandful
 
                 }
             },
@@ -212,13 +226,15 @@ export const AvailableEnemies = {
                         effect: attack.effect,
                         name: 'Whip',
                         range: 'long',
-                        class: 'physical'
+                        class: 'physical',
+                        damage: 2
                     },
                      bite: {
                         effect: attack.effect,
                         name: 'Bite',
                         range: 'close',
-                        class: 'physical'
+                        class: 'physical',
+                        damage: 1
                      }
                 },
                 prompt: 'A constant crawling and a sizzling sound can be heard from the trees. You step away looking to escape, but fall on a sticky net instead. The host slowly approaches you, salivating.',
@@ -239,7 +255,8 @@ export const AvailableEnemies = {
                         effect: attack.effect,
                         name: 'Tackle',
                         range: 'close',
-                        class: 'physical'
+                        class: 'physical',
+                        damage: 1
                     },
                 },
                 prompt: 'Tired and confused you sit on a rock, only to be received with rumbling and shaking. You hurriedly stand up, but the poor rock has already been disturbed.',
@@ -260,7 +277,8 @@ export const AvailableEnemies = {
                         effect: attack.effect,
                         name: 'Bite',
                         range: 'close',
-                        class: 'physical'
+                        class: 'physical',
+                        damage: 1
                     },
                 },
                 prompt: 'A sudden buzz passes you by- right before a few more pass right beside your ear. Soon enough, a myriad of insects is heading your way, their stingers at the ready.',

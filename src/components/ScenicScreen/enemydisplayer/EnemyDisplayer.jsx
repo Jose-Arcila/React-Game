@@ -11,7 +11,18 @@ export const EnemyDisplayer = () => {
         ...currentEnemy.skills
     }
 
-    const randomAttackSelector = Object.values(currentAvailableEnemyAttacks)[0]
+    const getRandomEnemyAttack = Math.floor(Math.random() * Object.values(currentEnemy.skills).length);
+    const randomAttackSelector = Object.values(currentEnemy.skills)[getRandomEnemyAttack]
+    const getRandomEnemyDrop = Math.floor(Math.random() * Object.values(currentEnemy.drops).length);
+    const randomDropSelector = Object.values(currentEnemy.drops)[getRandomEnemyDrop]
+
+
+    // const clgthis = ()=>{
+    //     console.log(randomDropSelector.name)
+    // }
+
+    // clgthis()
+
 
     useEffect(() => {
         if(currentEnemy.agi > MainCharacter.stats.dex.value){
@@ -42,7 +53,7 @@ export const EnemyDisplayer = () => {
         if(currentTurn === 'enemy'){
             if(0 < currentEnemy.hp){
                 setTimeout(() => {
-                    randomAttackSelector.effect(currentEnemy.atk, setCurrentAppState, MainCharacter);
+                    randomAttackSelector.effect(randomAttackSelector.damage, setCurrentAppState, MainCharacter);
                     setCurrentAppState(state=>{
                         return{
                             ...state,
@@ -51,13 +62,14 @@ export const EnemyDisplayer = () => {
                                 currentTurn: 'mainCharacter'
                             },
                             events: [
-                                `${currentEnemy.name + ' has used ' + randomAttackSelector.name + '!'}`,
+                                `${currentEnemy.name + ' has used ' + randomAttackSelector.name + '! ' + MainCharacter.name + ' has received ' + randomAttackSelector.damage + ' damage!'}`,
                                 ...state.events
                             ]
                         }
                     })
                 }, 300);
             } else {
+                let newDrop = randomDropSelector
                 setCurrentAppState(state=>{
                     return{
                         ...state,
@@ -72,11 +84,39 @@ export const EnemyDisplayer = () => {
                             activated: true
                         },
                         events: [
-                            `${currentEnemy.name + ' has died.'}`,
+                            `${currentEnemy.name + ' has died.' + ' You have managed to obtain ' + randomDropSelector.label + ' from its carcass'}`,
                             ...state.events
-                        ]
+                        ],
                     }
                 })
+                console.log(newDrop)
+                if(newDrop.quantity === 0) {
+                    setCurrentAppState(state=>{
+                        return{
+                            ...state,
+                            inventory: {
+                                ...state.inventory,
+                                [newDrop.name]: JSON.parse(JSON.stringify(newDrop))
+                            }
+                        }
+                    })
+                    newDrop.quantity++;
+                }else if(newDrop.quantity > 0){
+                    let newQuantity = newDrop.quantity++
+    
+                    setCurrentAppState(state=>{
+                        return{
+                            ...state,
+                            inventory: {
+                                ...state.inventory,
+                                [newDrop.name]: {
+                                    ...newDrop,
+                                    quantity: newQuantity
+                                }
+                            }
+                        }
+                    })
+                }
             }
         }
     }, [currentTurn])

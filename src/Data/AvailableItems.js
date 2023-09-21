@@ -2,12 +2,13 @@ export const AvailableItems = {
     oneStar: {
         general: {
             stick: {
+                id: 'A1',
                 label: "Stick",
                 name: 'stick',
                 type: "material, weapon",
                 description: "",
                 prompt: "The ground is littered with dry branches and leaves. You lower your body and fetch a single wooden stick. It's not much, but it's yours.",
-                equipable: true,
+                isEquipable: true,
                 quantity: 0,
                 damage: 1,
                 combinable: true,
@@ -19,6 +20,7 @@ export const AvailableItems = {
                 src: ''
             },
             stone: {
+                id: 'A2',
                 label: "Stone",
                 name: 'stone',
                 type: "material",
@@ -34,6 +36,7 @@ export const AvailableItems = {
                 src: ''
             },
             grassHandful: {
+                id: 'A3',
                 label: "Handful of Grass",
                 name: 'grassHandful',
                 type: "material",
@@ -47,6 +50,7 @@ export const AvailableItems = {
                 src: ''
             },
             berryOne: {
+                id: 'A4',
                 label: "Berry",
                 name: 'berryOne',
                 type: "consumable",
@@ -63,6 +67,7 @@ export const AvailableItems = {
                 src: ''
             },
             acridHerbs: {
+                id: 'A5',
                 label: "Acrid Herbs",
                 name: 'acridHerbs',
                 type: "consumable",
@@ -79,6 +84,7 @@ export const AvailableItems = {
                 src: ''
             },
             dullInsect: {
+                id: 'A6',
                 label: "Dull Insect",
                 name: 'dullInsect',
                 type: "consumable, material",
@@ -95,6 +101,7 @@ export const AvailableItems = {
                 src: ''
             },
             suspiciousFruit: {
+                id: 'A7',
                 label: "Suspicious Fruit",
                 name: 'suspiciousFruit',
                 type: "consumable",
@@ -111,6 +118,7 @@ export const AvailableItems = {
                 src: ''
             },
             leavesHandful: {
+                id: 'A8',
                 label: "Handful of Leaves",
                 name: 'leavesHandful',
                 type: "material",
@@ -124,6 +132,7 @@ export const AvailableItems = {
                 src: ''
             },
             treeVines: {
+                id: 'A9',
                 label: "Tree Vines",
                 name: 'treeVines',
                 type: "material",
@@ -137,6 +146,7 @@ export const AvailableItems = {
                 src: ''
             },
             smallBones: {
+                id: 'A10',
                 label: "Small Bones",
                 name: 'smallBones',
                 type: "material",
@@ -198,6 +208,7 @@ export const AvailableItems = {
                 label: "Primitive Club",
                 name: 'primitiveClub',
                 type: "weapon",
+                isEquipable: true,
                 description: "",
                 prompt: "",
                 equipable: {
@@ -206,7 +217,6 @@ export const AvailableItems = {
                 },
                 quantity: 0,
                 damage: 2,
-                equipable: false,
                 consumable: false,
                 src: ''
             },
@@ -220,8 +230,10 @@ export const AvailableItems = {
                 quantity: 0,
                 damage: 1,
                 equipable: false,
-                consumable: true,
-                isHealing: true,
+                consumable: {
+                    isConsumable: true,
+                    isHealing: true
+                },
                 state: 'drunk',
                 src: ''
             },
@@ -292,8 +304,10 @@ export const AvailableItems = {
                 quantity: 0,
                 damage: 1,
                 equipable: false,
-                consumable: true,
-                isHealing: true,
+                consumable: {
+                    isConsumable: true,
+                    isHealing: true
+                },
                 src: ''
             },
             brokenFangs: {

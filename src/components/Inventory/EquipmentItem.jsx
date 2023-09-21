@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { EquippedItemDescription } from "./EquippedItemDescription"
 
+
 export const EquipmentItem = ({name, itemContainer}) => {
     const [descriptionShowState, setDescriptionShowState] = useState({
         showItemDescription: false,
@@ -17,7 +18,7 @@ export const EquipmentItem = ({name, itemContainer}) => {
                 }
             })
         }else {
-            console.log('object empty')
+            return
         }
     }
     const hideCurrentItem=()=>{
@@ -31,7 +32,7 @@ export const EquipmentItem = ({name, itemContainer}) => {
 
     return (
         <div onMouseOver={showCurrentItem} onMouseOut={hideCurrentItem} className={'equipment-item-container ' + `${name}`}>
-            <p>{itemContainer.content.name}</p>
+            <p>{itemContainer.content.label}</p>
             {   showItemDescription && 
                 <EquippedItemDescription
                     item={itemContainer}

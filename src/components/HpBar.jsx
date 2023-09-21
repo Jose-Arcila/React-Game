@@ -15,12 +15,12 @@ export const HpBar = ({health, maxhealth, magic, maxmagic, name}) => {
                         <p>{health}/{maxhealth}</p>
                     </div>
                 </div>
-                {
+                {/* {
                     MainCharacter.skills.magicDetection.has &&
                     <div className="status-bar-bars-magic">
                         <p>{magic}/{maxmagic}</p>
                     </div>
-                } 
+                }  */}
                 
             </div>
 

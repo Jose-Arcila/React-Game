@@ -4,10 +4,10 @@ import { AppContext } from "../../context/AppContext"
 export const ItemMenu = ({itemMenuState, setItemMenuState}) => {
 
     const {currentAppState, setCurrentAppState} = useContext(AppContext)
-    const{ MainCharacter, inventory } = currentAppState
-    const { equipment, hp, stats } = MainCharacter
+    const{ MainCharacter, inventory, fight } = currentAppState
+    const { equipment, hp, stats, hprecovery } = MainCharacter
 
-    const {equipable, item, consumable, damage, name, type} = itemMenuState
+    const {equipable, item, consumable, damage, name, type, label} = itemMenuState
     const {isConsumable, isHealing} = consumable
     const {isEquipable, equipSlot} = equipable
     const mcBaseAttack = stats.str.value;
@@ -42,13 +42,16 @@ export const ItemMenu = ({itemMenuState, setItemMenuState}) => {
                                     value: mcBaseAttack + damage
                                 }
                             }
-                        }
+                        },
+                        events: [
+                            `${'You have equipped ' + name}`,
+                            ...state.events
+                        ]
                     }
                 })
             }
 
-        }else {
-            
+        }else {        
         }
     }
 
@@ -69,20 +72,61 @@ export const ItemMenu = ({itemMenuState, setItemMenuState}) => {
             })
             if(isHealing){
                 if(MainCharacter.hp.value < MainCharacter.maxhp) {
+                    if (!fight.isFighting) {
+                        setCurrentAppState(state=> {
+                            return {
+                            ...state,
+                            MainCharacter: {
+                                ...state.MainCharacter,
+                                hprecovery: hprecovery + damage
+    
+                            },
+                            events: [
+                                `You have eaten a ${label}. ${damage} health recovered`,
+                                ...state.events
+                            ]
+                        }})
+                        setTimeout(() => {
+                            setCurrentAppState(state=> {
+                                return {
+                                ...state,
+                                MainCharacter: {
+                                    ...state.MainCharacter,
+                                    hprecovery: 0.1
+        
+                                }
+                            }})
+                        }, 1000);
+                    }else {
+                        const updatedHpValue = currentAppState.MainCharacter.hp.value + damage
+                        const newHealthValue = Math.min(updatedHpValue, MainCharacter.maxhp)
+                        setCurrentAppState(state=> {
+                            return {
+                            ...state,
+                            MainCharacter: {
+                                ...state.MainCharacter,
+                                hp: {
+                                    ...hp,
+                                    value: newHealthValue
+                                }
+    
+                            },
+                            events: [
+                                `You have eaten a ${label}. ${damage} health recovered`,
+                                ...state.events
+                            ]
+                        }})
+                    }
+                }
+                else {
                     setCurrentAppState(state=> {
                         return {
                         ...state,
-                        MainCharacter: {
-                            ...state.MainCharacter,
-                            hp: {
-                                ...hp,
-                                value: state.MainCharacter.hp.value + damage
-                            }
-                        }
+                        events: [
+                            `${'You have eaten a ' + label + '. But you were already full'}`,
+                            ...state.events
+                        ]
                     }})
-                }
-                else {
-                    return
                 }
             }else {
                 setCurrentAppState(state=> {

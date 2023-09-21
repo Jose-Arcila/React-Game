@@ -19,20 +19,7 @@ export const MainCharacter = {
     totalExp: 0,
     expToLevel: 10,
     skills: {
-        search: {
-            has: true,
-            level: 0,
-            maxExp: 1,
-            currentExp: 0,
-            description: 'use your limited senses to search for whatever catches your eye.'
-        },
-        magicDetection: {
-            has: false,
-            level: 0,
-            maxExp: 1,
-            currentExp: 0,
-            description: "Receive feedback from your own magic power to understand the world around you."
-        }
+        
     },
     stats: {
         str: {

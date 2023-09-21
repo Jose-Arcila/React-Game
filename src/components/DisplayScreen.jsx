@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from 'react'
 import { ScenicScreen } from './ScenicScreen/ScenicScreen'
 import { Inventory } from './Inventory/Inventory'
 import { AppContext } from '../context/AppContext'
+import { Skills } from './SkillScreen/Skills'
 
 export const DisplayScreen = () => {
     const {currentAppState, setCurrentAppState} = useContext(AppContext);
@@ -10,37 +11,37 @@ export const DisplayScreen = () => {
     const {hp, maxhp, hprecovery} = MainCharacter
 
     const regenHealth =()=>{
-        setTimeout(() => {
-            let newHealthValue = Math.round((hp.value + hprecovery) * 10)/10
+        let newHealthValue = Math.round((hp.value + hprecovery) * 10)/10
 
-            if(hp.value < maxhp && !isFighting){
-                setCurrentAppState(state=>{
-                    return {
-                        ...state,
-                        MainCharacter: {
-                            ...state.MainCharacter,
-                            hp: {
-                                ...state.MainCharacter.hp,
-                                value: newHealthValue
-                            }
+        if(hp.value < maxhp && !isFighting){
+            setCurrentAppState(state=>{
+                return {
+                    ...state,
+                    MainCharacter: {
+                        ...state.MainCharacter,
+                        hp: {
+                            ...state.MainCharacter.hp,
+                            value: newHealthValue
                         }
                     }
-                })
-            }
-            // console.log(newHealthValue)
-        }, 1000);
+                }
+            })
+        }
+        // console.log(newHealthValue)
     }
 
-    console.log('hol')
-
-    regenHealth()
+    setTimeout(() => {
+        regenHealth()
+    }, 1000);
+    
 
     return (
         <div className="main-screen mainWrapper__container">
 
             { screenName === 'ScenicScreen' ? <ScenicScreen />
                 : screenName === 'Inventory' ? <Inventory />
-                : 'neither'
+                : screenName === 'Skills' ? <Skills />
+                : ''
             }
         </div>
             

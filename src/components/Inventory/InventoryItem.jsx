@@ -15,7 +15,8 @@ export const InventoryItem = ({itemName, itemDescription, itemType, itemSource, 
         damage: itemDamage,
         quantity: itemQuantity,
         type: itemType,
-        item: totalItem
+        item: totalItem,
+        label: itemLabel
     })
     
     const handleItemMenu=()=>{

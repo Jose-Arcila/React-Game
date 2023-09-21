@@ -1,10 +1,10 @@
 export const EquippedItemDescription = ({item}) => {
     const {content} = item
-    const {type, name, damage} = content
+    const {type, name, damage, label} = content
     return (
         <div className="equipment-item-container-description">
 
-            <p>{name}</p>
+            <p>{label}</p>
             {/* <p>Rarity: {content.type}</p> */}
 
             {
