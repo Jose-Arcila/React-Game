@@ -151,32 +151,32 @@ export const SearchButton = () => {
                 }
     
             }
-            // else if(91 <= randomNumberForSearch100 <= 95){
-            //     const randomEnemySelector = Object.values(searchLocation.availableEnemies.general)[randomNumberForSearch10]
-            //     setCurrentAppState(state=>{
-            //         return {
-            //             ...state,
-            //             button: {
-            //                 ...state.button,
-            //                 activated: false
-            //             },
-            //             prompts: {
-            //                 ...state.prompts,
-            //                 primaryPrompt: randomEnemySelector.prompt,
-            //             },
-            //             fight: {
-            //                 ...state.fight,
-            //                 isFighting: true,
-            //                 currentEnemy: randomEnemySelector
-            //             },
-            //             events: [
-            //                 `${'You have entered a fight with ' + randomEnemySelector.name + '!'}`,
-            //                 ...state.events
+            else if(91 <= randomNumberForSearch100 <= 95){
+                const randomEnemySelector = Object.values(searchLocation.availableEnemies.general)[randomNumberForSearch10]
+                setCurrentAppState(state=>{
+                    return {
+                        ...state,
+                        button: {
+                            ...state.button,
+                            activated: false
+                        },
+                        prompts: {
+                            ...state.prompts,
+                            primaryPrompt: randomEnemySelector.prompt,
+                        },
+                        fight: {
+                            ...state.fight,
+                            isFighting: true,
+                            currentEnemy: randomEnemySelector
+                        },
+                        events: [
+                            `${'You have entered a fight with ' + randomEnemySelector.name + '!'}`,
+                            ...state.events
     
-            //             ]
-            //         }
-            //     })
-            // }
+                        ]
+                    }
+                })
+            }
             else if(96 <= randomNumberForSearch100 <= 99) {
                 const getRandomSublocation = Math.floor(Math.random() * Object.values(currentLocation.subLocations).length)
                 const randomSublocationSelector = Object.values(currentLocation.subLocations)[getRandomSublocation]
