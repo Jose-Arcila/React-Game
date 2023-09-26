@@ -351,6 +351,52 @@ body .mainWrapper .navigator__button:active p, body .mainWrapper .navigator__but
   align-items: center;
   justify-content: center;
 }
+.inventory-left .inventory-space .inventory-item .combine-screen {
+  background-color: var(--bg-color);
+  border: 1px solid white;
+  padding: 10px;
+  border-radius: 4px;
+  position: absolute;
+  max-width: 300px;
+  width: 250%;
+  height: auto;
+  min-height: 100px;
+  max-height: 200px;
+  overflow: scroll;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 5px;
+  margin: 5px 0px 0 20px;
+}
+.inventory-left .inventory-space .inventory-item .combine-screen-item {
+  border: 1px solid white;
+  border-radius: 6px;
+  background-color: var(--bg-color);
+  width: 100%;
+  padding: 10px;
+  height: auto;
+  display: flex;
+  justify-content: space-between;
+}
+.inventory-left .inventory-space .inventory-item .combine-screen-item:hover {
+  background-color: white;
+}
+.inventory-left .inventory-space .inventory-item .combine-screen-item:hover h1 {
+  color: var(--bg-color);
+}
+.inventory-left .inventory-space .inventory-item .combine-screen-item:active {
+  background-color: var(--bg-color);
+}
+.inventory-left .inventory-space .inventory-item .combine-screen-item:active h1 {
+  color: white;
+}
+.inventory-left .inventory-space .inventory-item .combine-screen-item h1 {
+  font-size: 12px;
+  text-align: left;
+  margin: 0;
+}
 .inventory-left .inventory-space .inventory-item-content {
   box-sizing: border-box;
   height: 100%;
@@ -376,6 +422,27 @@ body .mainWrapper .navigator__button:active p, body .mainWrapper .navigator__but
   border-radius: 6px;
   padding: 10px;
 }
+.inventory-left .inventory-space .item-menu .inventory-item-description {
+  background-color: var(--bg-color);
+  padding: 10px;
+  border: 1px solid white;
+  color: white;
+  max-width: 250px;
+  width: 150%;
+  display: flex;
+  text-align: left;
+  flex-direction: column;
+  border-radius: 6px;
+  position: absolute;
+}
+.inventory-left .inventory-space .item-menu .inventory-item-description-title {
+  font-size: 16px;
+  margin: 0;
+}
+.inventory-left .inventory-space .item-menu .inventory-item-description-text {
+  font-size: 14px;
+  margin: 0 0 10px 0;
+}
 .inventory-left .inventory-space .item-menu-button {
   background-color: var(--bg-color);
   color: white;
@@ -386,6 +453,9 @@ body .mainWrapper .navigator__button:active p, body .mainWrapper .navigator__but
   font-size: 12px;
   cursor: pointer;
 }
+.inventory-left .inventory-space .item-menu-button .loading-analyze {
+  display: none;
+}
 .inventory-left .inventory-space .item-menu-button:hover {
   background-color: white;
   color: var(--bg-color);
@@ -393,6 +463,29 @@ body .mainWrapper .navigator__button:active p, body .mainWrapper .navigator__but
 .inventory-left .inventory-space .item-menu-button:active {
   background-color: var(--bg-color);
   color: white;
+}
+.inventory-left .inventory-space .item-menu .yes-analyzing {
+  background-color: var(--bg-color);
+  padding: 0;
+  position: relative;
+  overflow: hidden;
+}
+.inventory-left .inventory-space .item-menu .yes-analyzing .loading-analyze {
+  height: 100%;
+  width: 100%;
+  top: 0;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 100%;
+  overflow-wrap: hidden;
+  color: var(--bg-color);
+  background-color: white;
+  border-radius: 4px;
+  box-sizing: border-box;
+  animation-name: analyze-bar;
+  animation-duration: 4s;
 }
 .inventory-right {
   width: 50%;
@@ -504,11 +597,14 @@ body .mainWrapper .navigator__button:active p, body .mainWrapper .navigator__but
   width: 100%;
   height: 150%;
   max-height: 150%;
+  display: flex;
+  gap: 10px;
 }
 .skills .skills-container-skill {
   box-sizing: border-box;
   padding: 10px;
   border: 1px solid white;
+  width: 100%;
   max-width: 150px;
   border-radius: 6px;
   height: 100px;
@@ -532,7 +628,7 @@ body .mainWrapper .navigator__button:active p, body .mainWrapper .navigator__but
   position: absolute;
   background-color: var(--bg-color);
   z-index: 1;
-  margin-top: -35px;
+  margin-top: -45px;
   margin-left: 150px;
 }
 .skills .skills-container-skill .skill-description p {
@@ -548,6 +644,14 @@ body .mainWrapper .navigator__button:active p, body .mainWrapper .navigator__but
   }
 }
 @keyframes search-bar {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 100%;
+  }
+}
+@keyframes analyze-bar {
   from {
     width: 0%;
   }

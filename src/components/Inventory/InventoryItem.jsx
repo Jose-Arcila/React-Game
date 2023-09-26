@@ -1,22 +1,37 @@
-import { useState, useContext } from "react"
+import { useState, useContext, useEffect } from "react"
 import { ItemMenu } from "./ItemMenu"
 import { AppContext } from "../../context/AppContext"
+import { AvailableItems } from "../../Data/AvailableItems"
 
-export const InventoryItem = ({itemName, itemDescription, itemType, itemSource, itemQuantity, itemEquipable, itemConsumable, itemDamage, totalItem, itemLabel}) => {
+export const InventoryItem = ({itemName, itemType, itemSource, itemQuantity, itemEquipable, itemConsumable, itemDamage, totalItem, itemLabel, id}) => {
 
     const {currentAppState, setCurrentAppState} = useContext(AppContext)
-    const {inventory} = currentAppState
+    const {inventory, MainCharacter, currentLocation} = currentAppState
+    const {skills} = MainCharacter
+
+    const currentItem = inventory[itemName]
+
+    let itemDescriptionLevel = eval("currentItem.description0")
+
+    const changeDescriptionLevel =()=> {
+        if(skills.analyze){
+            itemDescriptionLevel = eval("currentItem.description" + skills.analyze.level)
+        }
+    }
+    changeDescriptionLevel()
     
     const [itemMenuState, setItemMenuState] = useState({
         exist: false,
         name: itemName,
+        description: itemDescriptionLevel,
         equipable: itemEquipable, 
         consumable: itemConsumable,
         damage: itemDamage,
         quantity: itemQuantity,
         type: itemType,
         item: totalItem,
-        label: itemLabel
+        label: itemLabel,
+        id: id
     })
     
     const handleItemMenu=()=>{
@@ -36,7 +51,6 @@ export const InventoryItem = ({itemName, itemDescription, itemType, itemSource, 
 
             <div className="inventory-item-content">
                 <p className="inventory-item-content-title">{itemLabel}</p>
-                <p className="inventory-item-content-description">{itemDescription}</p>
                 <img className="inventory-item-content-icon" src={itemSource}/>
 
                 <p className="inventory-item-content-quantity">{itemQuantity}</p>

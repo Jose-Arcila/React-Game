@@ -1,17 +1,13 @@
 import { useContext, useState } from 'react'
 import { AppContext } from '../../context/AppContext'
 import { SkillDescription } from './SkillDescription.jsx'
+import { SkillItem } from './SkillItem'
 
 
 export const Skills = () => {
     const {currentAppState, setCurrentAppState} = useContext(AppContext)
     const {MainCharacter} = currentAppState
     const {skills} = MainCharacter
-
-    const [showSkill, setShowSkill] = useState(false)
-
-    const handleShowSkill=()=> setShowSkill(true)
-    const handleHideSkill=()=> setShowSkill(false)
 
   return (
     <div className='skills'>
@@ -21,19 +17,14 @@ export const Skills = () => {
 
             {
                 Object.values(skills).map( ( u, i )=> 
-
-                    <div onMouseOver={handleShowSkill} onMouseOut={handleHideSkill} key={i} className='skills-container-skill'>
-                        <h2>{u.name}</h2>
-                        <p>level {u.level}</p>
-                        {
-                            showSkill && <SkillDescription 
-                                skillName={u.name}
-                                skillDescription={eval('u.description' + u.level)}
-                                skillLevel={u.level}
-                                skillCooldown={u.cooldown + `${u.level}`}
-                            />
-                        }
-                    </div>
+                    <SkillItem 
+                        key={i}
+                        name={u.name}
+                        description={eval('u.description' + u.level)}
+                        label={u.label}
+                        level={u.level}
+                        cooldown={u.cooldown}
+                    />
                 )
             }
 

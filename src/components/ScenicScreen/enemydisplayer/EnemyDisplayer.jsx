@@ -16,14 +16,6 @@ export const EnemyDisplayer = () => {
     const getRandomEnemyDrop = Math.floor(Math.random() * Object.values(currentEnemy.drops).length);
     const randomDropSelector = Object.values(currentEnemy.drops)[getRandomEnemyDrop]
 
-
-    // const clgthis = ()=>{
-    //     console.log(randomDropSelector.name)
-    // }
-
-    // clgthis()
-
-
     useEffect(() => {
         if(currentEnemy.agi > MainCharacter.stats.dex.value){
             setCurrentAppState(state=>{
@@ -89,7 +81,6 @@ export const EnemyDisplayer = () => {
                         ],
                     }
                 })
-                console.log(newDrop)
                 if(newDrop.quantity === 0) {
                     setCurrentAppState(state=>{
                         return{

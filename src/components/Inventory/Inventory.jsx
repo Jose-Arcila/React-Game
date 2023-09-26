@@ -7,7 +7,8 @@ import { CharacterStats } from "./CharacterStats";
 export const Inventory = () => {
 
     const {currentAppState} = useContext(AppContext)
-    const {inventory} = currentAppState
+    const {inventory, MainCharacter} = currentAppState
+    const {skills} = MainCharacter
 
     const [inventoryAffairsState, setInventoryAffairsState] = useState({
         statsVisible: false
@@ -26,7 +27,6 @@ export const Inventory = () => {
                             <InventoryItem 
                                 key={u.name }
                                 itemName={u.name}
-                                itemDescription={u.description}
                                 itemSource={u.src}
                                 itemType={u.type}
                                 itemQuantity={u.quantity}
@@ -35,6 +35,7 @@ export const Inventory = () => {
                                 itemLabel={u.label}
                                 itemDamage={u.damage}
                                 totalItem={u}
+                                id={u.id}
                             />
                         )
                     }

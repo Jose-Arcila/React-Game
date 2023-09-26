@@ -1,146 +1,50 @@
-import { useContext } from "react"
+import { useContext, useState } from "react"
 import { AppContext } from "../../context/AppContext"
+import { availableSkills } from "../../Data/AvailableSkills"
+import { exprelated } from "../../Data/importantFunctions"
+import { InventoryItemDescription } from "./InventoryItemDescription"
+import { handleEquip } from "./helpers/handleEquip"
+import { handleAnalyze } from "./helpers/handleAnalyze"
+import { handleConsume } from "./helpers/handleConsume"
+import { CombineScreen } from "./CombineScreen"
 
 export const ItemMenu = ({itemMenuState, setItemMenuState}) => {
 
     const {currentAppState, setCurrentAppState} = useContext(AppContext)
     const{ MainCharacter, inventory, fight } = currentAppState
-    const { equipment, hp, stats, hprecovery } = MainCharacter
+    const { equipment, hp, stats, hprecovery, skills } = MainCharacter
 
-    const {equipable, item, consumable, damage, name, type, label} = itemMenuState
+    const {equipable, item, consumable, damage, name, type, label, description, quantity} = itemMenuState
     const {isConsumable, isHealing} = consumable
     const {isEquipable, equipSlot} = equipable
+    const {giveexp} = exprelated
     const mcBaseAttack = stats.str.value;
+    const [isAnalyzing, setIsAnalyzing] = useState({
+        analyzing: 'not-analyzing',
+        finishedAnalyzing: false,
+        buttonDisabled: false
+    })
+    const [isCombining, setIsCombining] = useState(false)
+    const {analyzing, finishedAnalyzing, buttonDisabled} = isAnalyzing
 
-
-    const handleEquip =()=>{
-        if(isEquipable){
-            setCurrentAppState(state=> {
-                return {
-                ...state,
-                MainCharacter: {
-                    ...MainCharacter,
-                    equipment: {
-                        ...equipment,
-                        [equipSlot]: {
-                            content: item,
-                            name: [equipSlot]
-                        }
-                    }
-                }
-            }})
-            if(type.includes('weapon')){
-                setCurrentAppState(state=>{
-                    return {
-                        ...state,
-                        MainCharacter: {
-                            ...state.MainCharacter,
-                            stats: {
-                                ...state.MainCharacter.stats,
-                                phyAtk: {
-                                    ...state.MainCharacter.stats.phyAtk,
-                                    value: mcBaseAttack + damage
-                                }
-                            }
-                        },
-                        events: [
-                            `${'You have equipped ' + name}`,
-                            ...state.events
-                        ]
-                    }
-                })
-            }
-
-        }else {        
-        }
+    const handleCombine=()=>{
+        setIsCombining(true)
     }
 
-    const handleConsume=()=>{
-        if(isConsumable && inventory[name].quantity>0){
-            setCurrentAppState(currentAppState=>{
+    const handleDiscard=()=>{
+        if(inventory[name].quantity > 0) {
+            setCurrentAppState(state=>{
                 return {
-                    ...currentAppState,
+                    ...state,
                     inventory: {
-                        ...inventory,
-                        [name]: {   
-                            ...inventory[name],
-                            quantity: inventory[name].quantity-1
-                            
+                        ...state.inventory,
+                        [name]: {
+                            ...state.inventory[name],
+                            quantity: state.inventory[name].quantity - 1
                         }
                     }
                 }
             })
-            if(isHealing){
-                if(MainCharacter.hp.value < MainCharacter.maxhp) {
-                    if (!fight.isFighting) {
-                        setCurrentAppState(state=> {
-                            return {
-                            ...state,
-                            MainCharacter: {
-                                ...state.MainCharacter,
-                                hprecovery: hprecovery + damage
-    
-                            },
-                            events: [
-                                `You have eaten a ${label}. ${damage} health recovered`,
-                                ...state.events
-                            ]
-                        }})
-                        setTimeout(() => {
-                            setCurrentAppState(state=> {
-                                return {
-                                ...state,
-                                MainCharacter: {
-                                    ...state.MainCharacter,
-                                    hprecovery: 0.1
-        
-                                }
-                            }})
-                        }, 1000);
-                    }else {
-                        const updatedHpValue = currentAppState.MainCharacter.hp.value + damage
-                        const newHealthValue = Math.min(updatedHpValue, MainCharacter.maxhp)
-                        setCurrentAppState(state=> {
-                            return {
-                            ...state,
-                            MainCharacter: {
-                                ...state.MainCharacter,
-                                hp: {
-                                    ...hp,
-                                    value: newHealthValue
-                                }
-    
-                            },
-                            events: [
-                                `You have eaten a ${label}. ${damage} health recovered`,
-                                ...state.events
-                            ]
-                        }})
-                    }
-                }
-                else {
-                    setCurrentAppState(state=> {
-                        return {
-                        ...state,
-                        events: [
-                            `${'You have eaten a ' + label + '. But you were already full'}`,
-                            ...state.events
-                        ]
-                    }})
-                }
-            }else {
-                setCurrentAppState(state=> {
-                    return {
-                    ...state,
-                    MainCharacter: {
-                        ...MainCharacter,
-                        hp: {
-                            ...hp,
-                            value: hp.value - damage
-                        }
-                    }
-                }})
-            }
         }
     }
 
@@ -149,18 +53,30 @@ export const ItemMenu = ({itemMenuState, setItemMenuState}) => {
             return {
                 ...state,
                 exist: false
-        }}
+            }}
         )
     }
 
     return (
         <div className="item-menu" onMouseLeave={hideMenu}>
 
-            <button className="item-menu-button">Analyze</button>
-            <button className="item-menu-button" onClick={handleConsume}>Consume</button>
-            <button className="item-menu-button" onClick={handleEquip}>Equip</button>
-            <button className="item-menu-button">Combine</button>
-            <button className="item-menu-button">Discard</button>
+            <button disabled={buttonDisabled} className={"item-menu-button" + ' ' + analyzing} onClick={()=>handleAnalyze(skills, currentAppState, setCurrentAppState, giveexp, setIsAnalyzing, availableSkills)}>Analyze<div className="loading-analyze">Analyzing...</div></button>
+            {
+                finishedAnalyzing && <InventoryItemDescription 
+                    name={label}
+                    description={description}
+                />
+            }
+            <button className="item-menu-button" onClick={()=>handleConsume(isConsumable, isHealing, damage, currentAppState, setCurrentAppState, name, label, inventory, MainCharacter, fight)}>Consume</button>
+            <button className="item-menu-button" onClick={()=>handleEquip(isEquipable, currentAppState, setCurrentAppState, item, equipSlot, name, type, mcBaseAttack, damage, label)}>Equip</button>
+            <button className="item-menu-button" onClick={handleCombine}>Combine</button>
+            {
+                isCombining && <CombineScreen 
+                    firstItem={itemMenuState}
+                    inventory={inventory}
+                />
+            }
+            <button className="item-menu-button" onClick={handleDiscard}>Discard</button>
             
         </div>
     )
