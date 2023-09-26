@@ -78,32 +78,32 @@ export const SearchButton = () => {
 
         }else {
             if(MainCharacter.skills.search){exprelated.giveexp('search', currentAppState, setCurrentAppState)}
-            // target.disabled = true
+            target.disabled = true
 
-            // setCurrentAppState(state=>{
-            //     return{
-            //         ...state,
-            //         button: {
-            //             ...button,
-            //             currentBar: 'deactivated-search-bar'
-            //         }
-            //     }
-            // })
+            setCurrentAppState(state=>{
+                return{
+                    ...state,
+                    button: {
+                        ...button,
+                        currentBar: 'deactivated-search-bar'
+                    }
+                }
+            })
 
-            // if(activated === true) {
-            //     setTimeout(() => {
-            //         target.disabled = false
-            //         setCurrentAppState(state=>{
-            //             return{
-            //                 ...state,
-            //                 button: {
-            //                     ...button,
-            //                     currentBar: 'search-button-bar'
-            //                 }
-            //             }
-            //         })
-            //     }, 3000);
-            // }
+            if(activated === true) {
+                setTimeout(() => {
+                    target.disabled = false
+                    setCurrentAppState(state=>{
+                        return{
+                            ...state,
+                            button: {
+                                ...button,
+                                currentBar: 'search-button-bar'
+                            }
+                        }
+                    })
+                }, 3000);
+            }
 
             if(randomNumberForSearch100 <= 90){
                 const randomObjectSelector = Object.values(searchLocation.availableItems.general)[randomNumberForSearch10]
@@ -149,32 +149,32 @@ export const SearchButton = () => {
                 }
     
             }
-            // else if(91 <= randomNumberForSearch100 <= 95){
-            //     const randomEnemySelector = Object.values(searchLocation.availableEnemies.general)[randomNumberForSearch10]
-            //     setCurrentAppState(state=>{
-            //         return {
-            //             ...state,
-            //             button: {
-            //                 ...state.button,
-            //                 activated: false
-            //             },
-            //             prompts: {
-            //                 ...state.prompts,
-            //                 primaryPrompt: randomEnemySelector.prompt,
-            //             },
-            //             fight: {
-            //                 ...state.fight,
-            //                 isFighting: true,
-            //                 currentEnemy: randomEnemySelector
-            //             },
-            //             events: [
-            //                 `${'You have entered a fight with ' + randomEnemySelector.name + '!'}`,
-            //                 ...state.events
+            else if(91 <= randomNumberForSearch100 <= 95){
+                const randomEnemySelector = Object.values(searchLocation.availableEnemies.general)[randomNumberForSearch10]
+                setCurrentAppState(state=>{
+                    return {
+                        ...state,
+                        button: {
+                            ...state.button,
+                            activated: false
+                        },
+                        prompts: {
+                            ...state.prompts,
+                            primaryPrompt: randomEnemySelector.prompt,
+                        },
+                        fight: {
+                            ...state.fight,
+                            isFighting: true,
+                            currentEnemy: randomEnemySelector
+                        },
+                        events: [
+                            `${'You have entered a fight with ' + randomEnemySelector.name + '!'}`,
+                            ...state.events
     
-            //             ]
-            //         }
-            //     })
-            // }
+                        ]
+                    }
+                })
+            }
             else if(96 <= randomNumberForSearch100 <= 99) {
                 const getRandomSublocation = Math.floor(Math.random() * Object.values(currentLocation.subLocations).length)
                 const randomSublocationSelector = Object.values(currentLocation.subLocations)[getRandomSublocation]
