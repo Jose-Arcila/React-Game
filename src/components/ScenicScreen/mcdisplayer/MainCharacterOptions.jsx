@@ -1,22 +1,26 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { AppContext } from '../../../context/AppContext'
+import { buttonRelated, countRelated, exprelated, skillsRelated } from '../../../Data/importantFunctions'
+import { availableSkills } from '../../../Data/AvailableSkills'
+import { MCActiveSkills } from './MCActiveSkills'
 
 export const MainCharacterOptions = () => {
 
     const {currentAppState, setCurrentAppState} = useContext(AppContext)
-    const {MainCharacter, fight} = currentAppState
+    const {MainCharacter, fight, countThings, button} = currentAppState
     const {currentTurn, currentEnemy} = fight
     const {stats} = MainCharacter
+    const {changeCountThings} = countRelated
+    const {addSkill} = skillsRelated
+    const {turnOnAll, turnOffAll} = buttonRelated
+
+    const [areSkillsDisplayed, setAreSkillsDisplayed] = useState(false)
 
     const handleLoss =()=>{
         if(MainCharacter.hp.value <= 0){
             setCurrentAppState(state=>{
                 return {
                     ...state,
-                    button: {
-                        ...state.button,
-                        activated: true
-                    },
                     fight: {
                         ...state.fight, 
                         isFighting: false,
@@ -30,6 +34,7 @@ export const MainCharacterOptions = () => {
                     ]
                 }
             })
+            turnOnAll(button, setCurrentAppState)
         }else {
             return
         }
@@ -42,15 +47,10 @@ export const MainCharacterOptions = () => {
 
     const handleFlee =()=>{
         let chanceOfFleeing = (stats.dex.value + (currentEnemy.agi - stats.dex.value)) + (Math.floor(Math.random() * stats.dex.value))
-        console.log(chanceOfFleeing)
-        if (chanceOfFleeing > (currentEnemy.agi * 2)){
+        if (chanceOfFleeing > (currentEnemy.agi * 1.5)){
             setCurrentAppState(state=>{
                 return {
                     ...state,
-                    button: {
-                        ...state.button,
-                        activated: true
-                    },
                     fight: {
                         ...state.fight, 
                         isFighting: false,
@@ -63,6 +63,7 @@ export const MainCharacterOptions = () => {
                     ]
                 }
             })
+            turnOnAll(button, setCurrentAppState)
         }else {
             Object.values(currentEnemy.skills)[0].effect(currentEnemy.atk, setCurrentAppState, MainCharacter);
             setCurrentAppState(state=>{
@@ -81,10 +82,25 @@ export const MainCharacterOptions = () => {
             })
         }
     }
-    
 
     const handleMCAttack =()=> {
         if(currentTurn === 'mainCharacter'){
+            const isThereItem = MainCharacter.equipment.rightHand.content
+            if(isThereItem.type){
+                if(isThereItem.type.includes('blunt')){
+                    changeCountThings('bluntAttacks', setCurrentAppState)
+                    console.log(countThings)
+                    if(countThings.bluntAttacks > 9 && !MainCharacter.skills.slam){
+                        addSkill('slam', setCurrentAppState)
+                    }  
+                }
+            }else{
+                changeCountThings('fistAttacks', setCurrentAppState)
+                console.log(countThings)
+                if(countThings.fistAttacks > 9){
+                    addSkill('punch', setCurrentAppState)
+                }
+            }
             setCurrentAppState(state=>{
                 return {
                     ...state,
@@ -109,9 +125,14 @@ export const MainCharacterOptions = () => {
 
     return (
         <div className="mc-displayer-options">
-
             <button className="mc-displayer-options-button" onClick={handleMCAttack}>Attack</button>
             <button className="mc-displayer-options-button" onClick={handleFlee}>Flee</button>
+            <button className="mc-displayer-options-button" onClick={()=>setAreSkillsDisplayed(true)}>Skills</button>
+            {
+                areSkillsDisplayed
+                &&
+                <MCActiveSkills />
+            }
 
         </div>
     )

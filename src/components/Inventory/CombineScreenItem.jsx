@@ -29,7 +29,26 @@ export const CombineScreenItem = ({label, id, quantity, firstItem, name}) => {
                     }
                 })
             }else{
-            exprelated.giveexp('craft', currentAppState, setCurrentAppState) 
+                exprelated.giveexp('craft', currentAppState, setCurrentAppState)
+                if(MainCharacter.skills.craft.currentexp === 5){
+                    setCurrentAppState(state=>{
+                        return{
+                            ...state,
+                            navigatorButtons: {
+                                ...state.navigatorButtons,
+                                fourthButton: {
+                                    name: 'Crafts',
+                                    screenName: 'Crafts',
+                                    imgSrc: './craft-icon.svg'
+                                }
+                            },
+                            events: [
+                                <i>A torrent of information floods your mind. Blueprints and instructions you are sure you didn't know, but are now nested in your brain.</i>,
+                                ...state.events
+                            ]
+                        }
+                    })
+                }
             }
             if(firstItem.id === id){
                 if(quantity < 2){
@@ -58,7 +77,11 @@ export const CombineScreenItem = ({label, id, quantity, firstItem, name}) => {
                                         ...state.inventory[name],
                                         quantity: state.inventory[name].quantity - 2
                                     }
-                                }
+                                },
+                                events: [
+                                    `You have crafted a ${newItem.label}`,
+                                    ...state.events
+                                ]
                             }
                         }) 
                     }else{
@@ -75,13 +98,17 @@ export const CombineScreenItem = ({label, id, quantity, firstItem, name}) => {
                                         ...state.inventory[name],
                                         quantity: state.inventory[name].quantity - 2
                                     }
-                                }
+                                },
+                                events: [
+                                    `You have crafted a ${newItem.label}`,
+                                    ...state.events
+                                ]
                             }
                         }) 
                     }
                 }
             }else{
-                if(quantity > 0 && firstItem.quantity > 0){
+                if(quantity > 0 && currentAppState.inventory[firstItem.name].quantity > 0){
                     if(currentAppState.inventory[newItem.name] === undefined){
                         setCurrentAppState(state=>{
                             return {
@@ -100,7 +127,11 @@ export const CombineScreenItem = ({label, id, quantity, firstItem, name}) => {
                                         ...state.inventory[firstItem.name],
                                         quantity: state.inventory[firstItem.name].quantity - 1
                                     }
-                                }
+                                },
+                                events: [
+                                    `You have crafted a ${newItem.label}`,
+                                    ...state.events
+                                ]
                             }
                         })
                     }else{
@@ -121,8 +152,11 @@ export const CombineScreenItem = ({label, id, quantity, firstItem, name}) => {
                                         ...state.inventory[firstItem.name],
                                         quantity: state.inventory[firstItem.name].quantity - 1
                                     }
-
-                                }
+                                },
+                                events: [
+                                    `You have crafted a ${newItem.label}`,
+                                    ...state.events
+                                ]
                             }
                         }) 
                     }

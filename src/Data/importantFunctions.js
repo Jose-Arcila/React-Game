@@ -42,3 +42,100 @@ export const exprelated= {
         }
     }
 }
+
+export const countRelated = {
+    changeCountThings: (thing, setCurrentAppState)=>{
+        setCurrentAppState(state=>{
+            return {
+                ...state,
+                countThings: {
+                    ...state.countThings,
+                    [thing]: state.countThings[thing] + 1
+                }
+            }
+        })
+    }
+}
+
+export const skillsRelated = {
+    addSkill: (grantedSkill, setCurrentAppState )=>{
+        setCurrentAppState(state=>{
+            return {
+                ...state,
+                MainCharacter: {
+                    ...state.MainCharacter,
+                    skills: {
+                        ...state.MainCharacter.skills,
+                        [grantedSkill]: {
+                            ...state.availableSkills[grantedSkill]
+                        }
+                    }
+                },
+                events: [
+                    `Learning successful. The skill ${grantedSkill} has been acquired.`,
+                    ...state.events
+                ]
+            }
+        })
+    }
+}
+
+export const buttonRelated = {
+    turnOffAll: (valueHere, setCurrentAppState)=>{
+        for (const [key, value] of Object.entries(valueHere)) {
+            setCurrentAppState(state=>{
+                return{
+                    ...state,
+                    button: {
+                        ...state.button,
+                        [key]: {
+                            ...state.button[key],
+                            activated: false
+                        }
+                    }
+                }
+            })
+        }
+    },
+    turnOnAll: (valueHere, setCurrentAppState)=>{
+        for (const [key, value] of Object.entries(valueHere)) {
+            setCurrentAppState(state=>{
+                return{
+                    ...state,
+                    button: {
+                        ...state.button,
+                        [key]: {
+                            ...state.button[key],
+                            activated: true
+                        }
+                    }
+                }
+            })
+        }
+    }
+}
+
+export const eventRelated = {
+    addEvent: (event, setCurrentAppState)=>{
+        setCurrentAppState(state=>{
+            return{
+                ...state,
+                events: [
+                    event,
+                    ...state.events
+                ]
+            }
+        })
+    },
+    changePrimaryPrompt: (prompt, setCurrentAppState)=>{
+        setCurrentAppState(state=>{
+            return{
+                ...state,
+                prompts: [
+                    ...state.prompts,
+                    
+                ]
+            }
+        })
+    }
+}

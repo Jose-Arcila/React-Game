@@ -37,7 +37,7 @@ export const CharacterDisplay = ({inventoryAffairsState, setInventoryAffairsStat
                     <div className="status-health-bar">
                         <p>HP: {MainCharacter.hp.value}/{MainCharacter.maxhp}</p>  
                         <p>MP: {MainCharacter.mp.value}/{MainCharacter.maxmp}</p>
-
+                        <p>Stamina: {MainCharacter.stamina.value}/{MainCharacter.stamina.maxvalue}</p>
                     </div>
                 </div>
                 <div className="character-display-name-column-two"></div>

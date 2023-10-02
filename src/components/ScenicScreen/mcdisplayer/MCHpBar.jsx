@@ -1,7 +1,8 @@
 import { useContext } from 'react'
-import { AppContext } from '../context/AppContext'
+import { AppContext } from '../../../context/AppContext'
 
-export const HpBar = ({health, maxhealth, magic, maxmagic, name}) => {
+
+export const MCHpBar = ({health, maxhealth, magic, maxmagic, name, stamina}) => {
     const {currentAppState} = useContext(AppContext)
     const {MainCharacter} = currentAppState
     return (
@@ -9,13 +10,17 @@ export const HpBar = ({health, maxhealth, magic, maxmagic, name}) => {
             
             <h2>{name}</h2>
 
-            <div className="status-bar-bars">
-                <div className="status-bar-bars-health">
-                    <div className="health-bar">
-                        <p>{health}/{maxhealth}</p>
+            <div className="mc-status-bar-bars">
+                <div className="status-bar-bars-is health">
+                    <div className="bar">
+                        <p>HP {health}/{maxhealth}</p>
                     </div>
                 </div>
-
+                <div className="status-bar-bars-is stamina">
+                    <div className="bar">
+                        <p>Stamina {stamina.value}/{stamina.maxvalue}</p>
+                    </div>
+                </div>
                 {/* {
                     MainCharacter.skills.magicDetection.has &&
                     <div className="status-bar-bars-magic">

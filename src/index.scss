@@ -14,6 +14,12 @@
     padding: 0;
 }
 
+.flex-row-apart {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 body {
     --bg-color: #3a3a3a;
     background-color: var(--bg-color);
@@ -169,36 +175,45 @@ body {
                 max-width: 700px;
             }
         }
-        .search-button {
-            background-color: transparent;
-            max-width: 100px;
+        .button-holder {
+            display: flex;
             width: 100%;
-            text-transform: uppercase;
-            padding: 10px 10px;
-            border: 1px solid white;
-            border-radius: 4px;
-            cursor: pointer;
-            &:active {
-                background-color: white;
-                color: var(--bg-color);
-                .search-button-bar {
-                    background-color: var(--bg-color);
+            align-items: center;
+            justify-content: flex-start;
+            flex-wrap: wrap;
+            &-button {
+                background-color: transparent;
+                max-width: 120px;
+                width: 100%;
+                position: relative;
+                margin-right: 10px;
+                text-transform: uppercase;
+                padding: 10px 20px;
+                border: 1px solid white;
+                border-radius: 4px;
+                height: 50px;
+                cursor: pointer;
+                &:active {
+                    background-color: white;
+                    color: var(--bg-color);
+                    .search-button-bar {
+                        background-color: var(--bg-color);
+                    }
                 }
-
-            }
-            &-bar{
-                margin-top: 5px;
-                width: 100%;
-                height: 4px;
-                background-color: white;
-            }
-            .deactivated-search-bar {
-                margin-top: 5px;
-                width: 100%;
-                height: 4px;
-                background-color: white;
-                animation-name: search-bar;
-                animation-duration: 3s;
+                .search-button-bar{
+                    margin-top: 5px;
+                    width: 100%;
+                    height: 4px;
+                    background-color: white;
+                }
+                .deactivated-search-bar {
+                    margin-top: 5px;
+                    width: 100%;
+                    height: 4px;
+                    background-color: white;
+                    animation-name: search-bar;
+                    animation-duration: 3s;
+                }
             }
         }
         .disabled-search-button {
@@ -269,7 +284,7 @@ body {
                             width: 100%;
                             background-color: white;
                         }
-                    }
+                    } 
                     div{
                         height: 15px;
                         max-width: 100%;
@@ -286,7 +301,47 @@ body {
                             color: white;
                         }
                     }
-
+                    
+                }
+                
+            }
+            .mc-status-bar-bars {
+                height: auto;
+                width: 100%;
+                max-width: 80%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 5px;
+                .status-bar-bars-is {
+                    border: 1px solid white;
+                    border-radius: 6px;
+                    display: flex;
+                    width: 100%;
+                    padding: 5px 0px;
+                    align-items: center;
+                    .bar {
+                        padding: 5px;
+                        border-radius: 5px;
+                        width: 100%;
+                        background-color: white;
+                    }
+                }
+                div{
+                    height: 15px;
+                    max-width: 100%;
+                    width: 100%;
+                    p {
+                        border-radius: 5px;
+                        padding: 2px 5px 1px;
+                        box-sizing: border-box;
+                        font-size: 12px;
+                        width: 100px;
+                        max-width: 100px;
+                        margin: 0;
+                        background-color: var(--bg-color);
+                        color: white;
+                    }
                 }
             }
         }
@@ -299,6 +354,40 @@ body {
                     width: 100%;
                     display: flex;
                     flex-direction: column;
+                    .active-skills-container {
+                        background-color: var(--bg-color);
+                        border: 1px solid white;
+                        border-radius: 4px;
+                        margin: -50px 0px 0px 130px;
+                        padding: 10px;
+                        .active-skill{
+                            border: 1px solid white;
+                            padding: 5px;
+                            border-radius: 4px;
+                            max-width: 100px;
+                            display: flex;
+                            flex-wrap: wrap;
+                            flex-direction: column;
+                            cursor: pointer;
+                            hr {
+                                width: 100%;
+                            }
+                            &:active {
+                                background-color: white;
+                                h1, p {
+                                    color: var(--bg-color);
+                                }
+                            }
+                            h1 {
+                                font-size: 18px;
+                                margin: 0;
+                            }
+                            p {
+                                font-size: 10px;
+                                margin: 0;
+                            }
+                        }
+                    }
                     &-button {
                         background-color: var(--bg-color);
                         color: white;
@@ -343,6 +432,7 @@ body {
             align-items: flex-start;
             flex-wrap: wrap;
             padding: 5px 5px;
+            overflow-x: visible;
             overflow-y: scroll;
             .inventory-item {
                 max-width: 80px;
@@ -359,6 +449,7 @@ body {
                 flex-direction: column;
                 align-items: center;
                 justify-content: center;
+                position: relative;
                 .combine-screen {
                     background-color: var(--bg-color);
                     border: 1px solid white;
@@ -376,6 +467,7 @@ body {
                     align-items: flex-start;
                     justify-content: space-between;
                     gap: 5px;
+                    z-index: 1;
                     margin: 5px 0px 0 20px ;
                     &-item {
                         border: 1px solid white;
@@ -444,6 +536,7 @@ body {
                     flex-direction: column;
                     border-radius: 6px;
                     position: absolute;
+                    z-index: 1;
                     &-title {
                         font-size: 16px;
                         margin: 0;

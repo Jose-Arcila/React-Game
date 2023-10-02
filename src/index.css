@@ -11,6 +11,12 @@
   padding: 0;
 }
 
+.flex-row-apart {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 body {
   --bg-color: #3a3a3a;
   background-color: var(--bg-color);
@@ -163,30 +169,40 @@ body .mainWrapper .navigator__button:active p, body .mainWrapper .navigator__but
 .scenic-screen .search-button-container .prompt-container .primary-prompt {
   max-width: 700px;
 }
-.scenic-screen .search-button-container .search-button {
-  background-color: transparent;
-  max-width: 100px;
+.scenic-screen .search-button-container .button-holder {
+  display: flex;
   width: 100%;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+.scenic-screen .search-button-container .button-holder-button {
+  background-color: transparent;
+  max-width: 120px;
+  width: 100%;
+  position: relative;
+  margin-right: 10px;
   text-transform: uppercase;
-  padding: 10px 10px;
+  padding: 10px 20px;
   border: 1px solid white;
   border-radius: 4px;
+  height: 50px;
   cursor: pointer;
 }
-.scenic-screen .search-button-container .search-button:active {
+.scenic-screen .search-button-container .button-holder-button:active {
   background-color: white;
   color: var(--bg-color);
 }
-.scenic-screen .search-button-container .search-button:active .search-button-bar {
+.scenic-screen .search-button-container .button-holder-button:active .search-button-bar {
   background-color: var(--bg-color);
 }
-.scenic-screen .search-button-container .search-button-bar {
+.scenic-screen .search-button-container .button-holder-button .search-button-bar {
   margin-top: 5px;
   width: 100%;
   height: 4px;
   background-color: white;
 }
-.scenic-screen .search-button-container .search-button .deactivated-search-bar {
+.scenic-screen .search-button-container .button-holder-button .deactivated-search-bar {
   margin-top: 5px;
   width: 100%;
   height: 4px;
@@ -282,6 +298,45 @@ body .mainWrapper .navigator__button:active p, body .mainWrapper .navigator__but
   background-color: var(--bg-color);
   color: white;
 }
+.scenic-screen-action-container .mc-displayer .mc-status-bar-bars, .scenic-screen-action-container .enemy-displayer .mc-status-bar-bars {
+  height: auto;
+  width: 100%;
+  max-width: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+.scenic-screen-action-container .mc-displayer .mc-status-bar-bars .status-bar-bars-is, .scenic-screen-action-container .enemy-displayer .mc-status-bar-bars .status-bar-bars-is {
+  border: 1px solid white;
+  border-radius: 6px;
+  display: flex;
+  width: 100%;
+  padding: 5px 0px;
+  align-items: center;
+}
+.scenic-screen-action-container .mc-displayer .mc-status-bar-bars .status-bar-bars-is .bar, .scenic-screen-action-container .enemy-displayer .mc-status-bar-bars .status-bar-bars-is .bar {
+  padding: 5px;
+  border-radius: 5px;
+  width: 100%;
+  background-color: white;
+}
+.scenic-screen-action-container .mc-displayer .mc-status-bar-bars div, .scenic-screen-action-container .enemy-displayer .mc-status-bar-bars div {
+  height: 15px;
+  max-width: 100%;
+  width: 100%;
+}
+.scenic-screen-action-container .mc-displayer .mc-status-bar-bars div p, .scenic-screen-action-container .enemy-displayer .mc-status-bar-bars div p {
+  border-radius: 5px;
+  padding: 2px 5px 1px;
+  box-sizing: border-box;
+  font-size: 12px;
+  width: 100px;
+  max-width: 100px;
+  margin: 0;
+  background-color: var(--bg-color);
+  color: white;
+}
 .scenic-screen-action-container .mc-displayer-bottom-row {
   display: flex;
   justify-content: space-evenly;
@@ -291,6 +346,40 @@ body .mainWrapper .navigator__button:active p, body .mainWrapper .navigator__but
   width: 100%;
   display: flex;
   flex-direction: column;
+}
+.scenic-screen-action-container .mc-displayer-bottom-row .mc-displayer-options .active-skills-container {
+  background-color: var(--bg-color);
+  border: 1px solid white;
+  border-radius: 4px;
+  margin: -50px 0px 0px 130px;
+  padding: 10px;
+}
+.scenic-screen-action-container .mc-displayer-bottom-row .mc-displayer-options .active-skills-container .active-skill {
+  border: 1px solid white;
+  padding: 5px;
+  border-radius: 4px;
+  max-width: 100px;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  cursor: pointer;
+}
+.scenic-screen-action-container .mc-displayer-bottom-row .mc-displayer-options .active-skills-container .active-skill hr {
+  width: 100%;
+}
+.scenic-screen-action-container .mc-displayer-bottom-row .mc-displayer-options .active-skills-container .active-skill:active {
+  background-color: white;
+}
+.scenic-screen-action-container .mc-displayer-bottom-row .mc-displayer-options .active-skills-container .active-skill:active h1, .scenic-screen-action-container .mc-displayer-bottom-row .mc-displayer-options .active-skills-container .active-skill:active p {
+  color: var(--bg-color);
+}
+.scenic-screen-action-container .mc-displayer-bottom-row .mc-displayer-options .active-skills-container .active-skill h1 {
+  font-size: 18px;
+  margin: 0;
+}
+.scenic-screen-action-container .mc-displayer-bottom-row .mc-displayer-options .active-skills-container .active-skill p {
+  font-size: 10px;
+  margin: 0;
 }
 .scenic-screen-action-container .mc-displayer-bottom-row .mc-displayer-options-button {
   background-color: var(--bg-color);
@@ -333,6 +422,7 @@ body .mainWrapper .navigator__button:active p, body .mainWrapper .navigator__but
   align-items: flex-start;
   flex-wrap: wrap;
   padding: 5px 5px;
+  overflow-x: visible;
   overflow-y: scroll;
 }
 .inventory-left .inventory-space .inventory-item {
@@ -350,6 +440,7 @@ body .mainWrapper .navigator__button:active p, body .mainWrapper .navigator__but
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  position: relative;
 }
 .inventory-left .inventory-space .inventory-item .combine-screen {
   background-color: var(--bg-color);
@@ -368,6 +459,7 @@ body .mainWrapper .navigator__button:active p, body .mainWrapper .navigator__but
   align-items: flex-start;
   justify-content: space-between;
   gap: 5px;
+  z-index: 1;
   margin: 5px 0px 0 20px;
 }
 .inventory-left .inventory-space .inventory-item .combine-screen-item {
@@ -434,6 +526,7 @@ body .mainWrapper .navigator__button:active p, body .mainWrapper .navigator__but
   flex-direction: column;
   border-radius: 6px;
   position: absolute;
+  z-index: 1;
 }
 .inventory-left .inventory-space .item-menu .inventory-item-description-title {
   font-size: 16px;

@@ -5,6 +5,11 @@ export const MainCharacter = {
         name: 'hp',
         value: 10
     },
+    stamina: {
+        name: 'sta',
+        value: 10,
+        maxvalue: 10
+    },
     maxhp: 10,
     hprecovery: 0.1,
     sp: {

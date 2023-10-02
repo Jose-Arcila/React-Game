@@ -22,19 +22,51 @@ export const MainWrapper = () => {
                 }
             }
         },
-        inventory: {},
+        inventory: {
+            // test only
+            hatchet: {
+                id: 'A1A2A2',
+                label: "Hatchet",
+                name: 'hatchet',
+                type: "cutting weapon, axe",
+                class: "savage",
+                description0: "A crude hatchet made with stick and stone. \n damage: 3",
+                description1: "A crude hatchet made with stick and stone. It could serve as more than a primitive weapon. \n damage: 3",
+                description2: "A crude hatchet made with stick and stone. Combine it with a stick to make a hatchet. \n damage: 3",
+                description3: "A crude hatchet made with stick and stone. Combine it with a stick to make a hatchet. \n damage: 3",
+                equipable: {
+                    isEquipable: true,
+                    equipSlot: 'rightHand'
+                },
+                quantity: 1,
+                damage: 3,
+                consumable: false,
+                src: ''
+            }
+        },
         prompts: {
             primaryPrompt: 'Your eyes feel strangely heavy as you pry them open. As you stand to your feet you look around, stranged, and find yourself surrounded by nothing but wilderness.',
             secondaryPrompt: 'A twisted tree laying low beneath the canopies is your only reference.'
         }, 
-        MainCharacter,
-        AvailableEnemies,
+        MainCharacter: {...MainCharacter},
+        AvailableEnemies: {...AvailableEnemies},
         availableSkills,
         Locations,
+        countThings: {
+            bluntAttacks: 0,
+            pierceAttacks: 0,
+            slashingAttacks: 0,
+            fistAttacks: 0
+        },
         fight: {
             isFighting: false,
             currentEnemy: {},
             currentTurn: 'mainCharacter',
+        },
+        secondaryEvents: {
+            woodChop: {
+                isChopping: false
+            }
         },
         navigatorButtons: {
             firstButton: {
@@ -56,12 +88,24 @@ export const MainWrapper = () => {
                 name: '????',
                 screenName: '????',
                 imgSrc: './question-icon.svg',
+            },
+            fifthButton: {
+                name: '?????',
+                screenName: '?????',
+                imgSrc: './question-icon.svg',
             }
         },
         button: {
-            activated: true,
-            currentBar: 'search-button-bar',
-            waitTime: 30
+            search: {
+                activated: true,
+                name: 'search',
+                currentBar: 'search-button-bar'
+            },
+            lumber: {
+                activated: true,
+                name: 'lumber',
+                currentBar: 'search-button-bar'
+            }
         },
         events: [
             'You wake up. An eerie sensation permeates the air.'

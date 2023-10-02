@@ -6,30 +6,36 @@ export const LocationNavigator = ({nombreBoton}) => {
     const {currentAppState, setCurrentAppState} = useContext(AppContext)
     const {currentLocation} = currentAppState
     const {availableSubLocations} = currentLocation
+    
 
     const changeSubscreen=(name)=>{
-        setCurrentAppState(state=>{
-            return{
-                ...state,
-                currentLocation: {
-                    ...currentLocation,
-                    subLocation: {
-                        ...availableSubLocations[name]
-                    },
-                    availableSubLocations: {
-                        ...availableSubLocations,
-                        [name]: {
-                            ...availableSubLocations[name],
-                            isSelected: 'background-reversed'
+        Object.values(availableSubLocations).map((u, i)=>{
+            setCurrentAppState(state=>{
+                return{
+                    ...state,
+                    currentLocation: {
+                        ...currentLocation,
+                        availableSubLocations: {
+                            ...availableSubLocations,
+                            [u.name]: {
+                                ...availableSubLocations[u.name],
+                                isSelected: "background-normal"
+                            },
+                            TwistedTree: {
+                                ...availableSubLocations.TwistedTree,
+                                isSelected: "background-normal"
+                            },
+                            [name]: {
+                                ...availableSubLocations[name],
+                                isSelected: "background-reversed"
+                            }
                         }
                     }
                 }
-            }
+            })
         })
-        console.log(currentLocation.subLocation)
+  
     }
-
-    
 
     return (
         <div className="location-navigator">

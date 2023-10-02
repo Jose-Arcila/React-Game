@@ -1,15 +1,13 @@
 import { useContext, useEffect } from 'react'
 import { AppContext } from '../../../context/AppContext'
 import { HpBar } from '../../HpBar'
+import { buttonRelated } from '../../../Data/importantFunctions'
 
 export const EnemyDisplayer = () => {
     const {currentAppState, setCurrentAppState} = useContext(AppContext)
-    const {fight, MainCharacter, inventory} = currentAppState
+    const {fight, MainCharacter, inventory, button} = currentAppState
     const {currentEnemy, currentTurn} = fight
-
-    const currentAvailableEnemyAttacks = {
-        ...currentEnemy.skills
-    }
+    const {turnOnAll, turnOffAll} = buttonRelated
 
     const getRandomEnemyAttack = Math.floor(Math.random() * Object.values(currentEnemy.skills).length);
     const randomAttackSelector = Object.values(currentEnemy.skills)[getRandomEnemyAttack]
@@ -39,7 +37,7 @@ export const EnemyDisplayer = () => {
                 }
             })
         }
-    }, [])
+    }, [currentEnemy])
 
     useEffect(() => {
         if(currentTurn === 'enemy'){
@@ -71,16 +69,14 @@ export const EnemyDisplayer = () => {
                             currentEnemy: {},
                             currentTurn: 'MainCharacter'
                         },
-                        button: {
-                            ...state.button,
-                            activated: true
-                        },
                         events: [
                             `${currentEnemy.name + ' has died.' + ' You have managed to obtain ' + randomDropSelector.label + ' from its carcass'}`,
                             ...state.events
                         ],
                     }
                 })
+                turnOnAll(button, setCurrentAppState)
+
                 if(newDrop.quantity === 0) {
                     setCurrentAppState(state=>{
                         return{

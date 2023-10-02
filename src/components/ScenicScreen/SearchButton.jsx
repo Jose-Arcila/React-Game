@@ -1,13 +1,15 @@
 import React, { useContext } from 'react'
 import { AppContext } from "../../context/AppContext"
-import { exprelated } from '../../Data/importantFunctions'
+import { exprelated, buttonRelated } from '../../Data/importantFunctions'
 
 
 export const SearchButton = () => {
 
     const {currentAppState, setCurrentAppState} = useContext(AppContext);
     const {currentLocation, prompts, button, Locations, availableSkills, MainCharacter, navigatorButtons} = currentAppState;
-    const {activated, currentBar, waitTime} = button
+    const {search} = button
+    const {turnOffAll, turnOnAll} = buttonRelated
+    const {activated, currentBar} = search
 
     const {primaryPrompt, secondaryPrompt} = prompts;
 
@@ -17,7 +19,7 @@ export const SearchButton = () => {
     }
 
     const giveRandomNumber10 =()=>{
-        const randomNumberForSearch = Math.floor(Math.random() * 10);
+        const randomNumberForSearch = Math.floor(Math.random() * Object.values(currentLocation.subLocation.availableItems.general).length);
         return randomNumberForSearch;
     }
 
@@ -78,32 +80,38 @@ export const SearchButton = () => {
 
         }else {
             if(MainCharacter.skills.search){exprelated.giveexp('search', currentAppState, setCurrentAppState)}
-            target.disabled = true
+            // target.disabled = true
 
-            setCurrentAppState(state=>{
-                return{
-                    ...state,
-                    button: {
-                        ...button,
-                        currentBar: 'deactivated-search-bar'
-                    }
-                }
-            })
+            // setCurrentAppState(state=>{
+            //     return{
+            //         ...state,
+            //         button: {
+            //             ...button,
+            //             search: {
+            //                 ...search,
+            //                 currentBar: 'deactivated-search-bar'
+            //             }
+            //         }
+            //     }
+            // })
 
-            if(activated === true) {
-                setTimeout(() => {
-                    target.disabled = false
-                    setCurrentAppState(state=>{
-                        return{
-                            ...state,
-                            button: {
-                                ...button,
-                                currentBar: 'search-button-bar'
-                            }
-                        }
-                    })
-                }, 3000);
-            }
+            // if(activated === true) {
+            //     setTimeout(() => {
+            //         target.disabled = false
+            //         setCurrentAppState(state=>{
+            //             return{
+            //                 ...state,
+            //                 button: {
+            //                     ...button,
+            //                     search: {
+            //                         ...search,
+            //                         currentBar: 'search-button-bar'
+            //                     }
+            //                 }
+            //             }
+            //         })
+            //     }, 3000);
+            // }
 
             if(randomNumberForSearch100 <= 90){
                 const randomObjectSelector = Object.values(searchLocation.availableItems.general)[randomNumberForSearch10]
@@ -149,32 +157,29 @@ export const SearchButton = () => {
                 }
     
             }
-            else if(91 <= randomNumberForSearch100 <= 95){
-                const randomEnemySelector = Object.values(searchLocation.availableEnemies.general)[randomNumberForSearch10]
-                setCurrentAppState(state=>{
-                    return {
-                        ...state,
-                        button: {
-                            ...state.button,
-                            activated: false
-                        },
-                        prompts: {
-                            ...state.prompts,
-                            primaryPrompt: randomEnemySelector.prompt,
-                        },
-                        fight: {
-                            ...state.fight,
-                            isFighting: true,
-                            currentEnemy: randomEnemySelector
-                        },
-                        events: [
-                            `${'You have entered a fight with ' + randomEnemySelector.name + '!'}`,
-                            ...state.events
+            // else if(91 <= randomNumberForSearch100 <= 95){
+            //     const randomEnemySelector = Object.values(searchLocation.availableEnemies.general)[randomNumberForSearch10]
+            //     setCurrentAppState(state=>{
+            //         return {
+            //             ...state,
+            //             prompts: {
+            //                 ...state.prompts,
+            //                 primaryPrompt: randomEnemySelector.prompt,
+            //             },
+            //             fight: {
+            //                 ...state.fight,
+            //                 isFighting: true,
+            //                 currentEnemy: randomEnemySelector
+            //             },
+            //             events: [
+            //                 `${'You have entered a fight with ' + randomEnemySelector.name + '!'}`,
+            //                 ...state.events
     
-                        ]
-                    }
-                })
-            }
+            //             ]
+            //         }
+            //     })
+            //     turnOffAll(button, setCurrentAppState)
+            // }
             else if(96 <= randomNumberForSearch100 <= 99) {
                 const getRandomSublocation = Math.floor(Math.random() * Object.values(currentLocation.subLocations).length)
                 const randomSublocationSelector = Object.values(currentLocation.subLocations)[getRandomSublocation]
@@ -196,7 +201,14 @@ export const SearchButton = () => {
                                 ...state.currentLocation,
                                 availableSubLocations: {
                                     ...state.currentLocation.availableSubLocations,
-                                    [randomSublocationSelector.name]: randomSublocationSelector 
+                                    [randomSublocationSelector.name]: {
+                                        ...randomSublocationSelector,
+                                        isSelected: 'background-reversed'
+                                    },
+                                    TwistedTree:{
+                                        ...state.currentLocation.availableSubLocations.TwistedTree,
+                                        isSelected: "background-normal"
+                                    } 
                                 },
                                 subLocation: {
                                     ...randomSublocationSelector
@@ -220,10 +232,10 @@ export const SearchButton = () => {
 
     return (
 
-        <div>
+        <>
             {
                 activated === true ?
-                <button className="search-button" onClick={(e)=>handleSearch(e)}>
+                <button className="button-holder-button search-button" onClick={(e)=>handleSearch(e)}>
                     Search
                     <div className={currentBar}></div>
                 </button>
@@ -233,7 +245,7 @@ export const SearchButton = () => {
                     <div className="disabled-search-button-bar"></div>
                 </button>
             }
-        </div>
+        </>
 
 
     )
