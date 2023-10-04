@@ -4,33 +4,31 @@ import { AvailableItems } from "../../Data/AvailableItems"
 import { availableSkills } from "../../Data/AvailableSkills"
 import { exprelated } from "../../Data/importantFunctions"
 
-export const CombineScreenItem = ({label, id, quantity, firstItem, name}) => {
+export const CombineScreenItem = ({label, id, quantity, firstItem, name, setIsCombining}) => {
     let newID = firstItem.id + id
 
     const {currentAppState, setCurrentAppState} = useContext(AppContext)
     const {MainCharacter} = currentAppState
+    const {skills} = MainCharacter
 
-    const showNewId=()=> {
+    const handleCraft=()=> {
         const newItem = AvailableItems.oneStar.combinedItems[newID]
-
-
         if(newItem !== undefined ) {        
-            if(!MainCharacter.skills.craft){
+            if(!skills.craft){
                 setCurrentAppState(state=>{
                     return{
                         ...state,
                         MainCharacter: {
                             ...MainCharacter,
                             skills: {
-                                ...MainCharacter.skills,
+                                ...skills,
                                 craft: JSON.parse(JSON.stringify(availableSkills.craft))
                             }
                         }
                     }
                 })
             }else{
-                exprelated.giveexp('craft', currentAppState, setCurrentAppState)
-                if(MainCharacter.skills.craft.currentexp === 5){
+                if(skills.craft.currentexp === 5){
                     setCurrentAppState(state=>{
                         return{
                             ...state,
@@ -62,7 +60,7 @@ export const CombineScreenItem = ({label, id, quantity, firstItem, name}) => {
                         }
                     }) 
                 }else {
-                    console.log(currentAppState.inventory[newItem.name])
+                    if(skills.craft){exprelated.giveexp('craft', currentAppState, setCurrentAppState)}
                     if(currentAppState.inventory[newItem.name] === undefined){
                         setCurrentAppState(state=>{
                             return {
@@ -109,6 +107,7 @@ export const CombineScreenItem = ({label, id, quantity, firstItem, name}) => {
                 }
             }else{
                 if(quantity > 0 && currentAppState.inventory[firstItem.name].quantity > 0){
+                    if(skills.craft){exprelated.giveexp('craft', currentAppState, setCurrentAppState)}
                     if(currentAppState.inventory[newItem.name] === undefined){
                         setCurrentAppState(state=>{
                             return {
@@ -187,7 +186,7 @@ export const CombineScreenItem = ({label, id, quantity, firstItem, name}) => {
     }
 
   return (
-    <div className="combine-screen-item" onClick={showNewId}>
+    <div className="combine-screen-item" onClick={handleCraft}>
         <h1>{label}</h1>
         <h1>{quantity}</h1>
     </div>

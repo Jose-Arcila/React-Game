@@ -2,6 +2,8 @@ import { useState, useContext, useEffect } from "react"
 import { ItemMenu } from "./ItemMenu"
 import { AppContext } from "../../context/AppContext"
 import { AvailableItems } from "../../Data/AvailableItems"
+import { CombineScreen } from "./CombineScreen"
+
 
 export const InventoryItem = ({itemName, itemType, itemSource, itemQuantity, itemEquipable, itemConsumable, itemDamage, totalItem, itemLabel, id}) => {
 
@@ -11,19 +13,22 @@ export const InventoryItem = ({itemName, itemType, itemSource, itemQuantity, ite
 
     const currentItem = inventory[itemName]
 
-    let itemDescriptionLevel = eval("currentItem.description0")
+    let itemDescriptionLevel = currentItem['description0']
 
     const changeDescriptionLevel =()=> {
         if(skills.analyze){
-            itemDescriptionLevel = eval("currentItem.description" + skills.analyze.level)
+            return currentItem[Function("return " + "'" + "description" + skills.analyze.level + "'")()]
+        }else{
+            return currentItem['description0']
         }
+
     }
-    changeDescriptionLevel()
-    
+
+    const [isCombining, setIsCombining] = useState(false)
     const [itemMenuState, setItemMenuState] = useState({
         exist: false,
         name: itemName,
-        description: itemDescriptionLevel,
+        description: changeDescriptionLevel(),
         equipable: itemEquipable, 
         consumable: itemConsumable,
         damage: itemDamage,
@@ -41,13 +46,25 @@ export const InventoryItem = ({itemName, itemType, itemSource, itemQuantity, ite
         })
     }
 
+
     return (
         <div className={"inventory-item " + itemType} onClick={handleItemMenu}>
 
             { itemMenuState.exist && <ItemMenu 
                 itemMenuState={itemMenuState}
                 setItemMenuState={setItemMenuState}
+                isCombining={isCombining}
+                setIsCombining={setIsCombining}
             /> }
+
+            {
+                isCombining && <CombineScreen 
+                    firstItem={itemMenuState}
+                    inventory={inventory}
+                    isCombining={isCombining}
+                    setIsCombining={setIsCombining}
+                />
+            }
 
             <div className="inventory-item-content">
                 <p className="inventory-item-content-title">{itemLabel}</p>

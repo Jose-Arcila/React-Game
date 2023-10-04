@@ -3,6 +3,7 @@ import { ScenicScreen } from './ScenicScreen/ScenicScreen'
 import { Inventory } from './Inventory/Inventory'
 import { AppContext } from '../context/AppContext'
 import { Skills } from './SkillScreen/Skills'
+import { CraftScreen } from './Crafting/CraftScreen'
 
 export const DisplayScreen = () => {
     const {currentAppState, setCurrentAppState} = useContext(AppContext);
@@ -41,6 +42,7 @@ export const DisplayScreen = () => {
             { screenName === 'ScenicScreen' ? <ScenicScreen />
                 : screenName === 'Inventory' ? <Inventory />
                 : screenName === 'Skills' ? <Skills />
+                : screenName === 'Crafts' ? <CraftScreen />
                 : ''
             }
         </div>

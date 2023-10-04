@@ -212,6 +212,23 @@ export const AvailableItems = {
             
             
         },
+        specialDrops: {
+            SD1: {
+                id: 'SD1',
+                label: "Wood",
+                name: 'wood',
+                type: "material",
+                description0: "Simple, reliable, sturdy wood.",
+                description1: "Simple, reliable, sturdy wood.",
+                description2: "Simple, reliable, sturdy wood.",
+                description3: "Simple, reliable, sturdy wood.",
+                equipable: false,
+                quantity: 0,
+                damage: 0,
+                consumable: false,
+                src: ''
+            }
+        },
         combinedItems: {
             A1A2: {
                 id: 'A1A2',
@@ -278,8 +295,8 @@ export const AvailableItems = {
                 class: "savage",
                 description0: "A crude hatchet made with stick and stone. \n damage: 3",
                 description1: "A crude hatchet made with stick and stone. It could serve as more than a primitive weapon. \n damage: 3",
-                description2: "A crude hatchet made with stick and stone. Combine it with a stick to make a hatchet. \n damage: 3",
-                description3: "A crude hatchet made with stick and stone. Combine it with a stick to make a hatchet. \n damage: 3",
+                description2: "A crude hatchet made with stick and stone. \n damage: 3",
+                description3: "A crude hatchet made with stick and stone. \n damage: 3",
                 equipable: {
                     isEquipable: true,
                     equipSlot: 'rightHand'
@@ -297,8 +314,8 @@ export const AvailableItems = {
                 class: "savage",
                 description0: "A crude hatchet made with stick and stone. \n damage: 3",
                 description1: "A crude hatchet made with stick and stone. It could serve as more than a primitive weapon. \n damage: 3",
-                description2: "A crude hatchet made with stick and stone. Combine it with a stick to make a hatchet. \n damage: 3",
-                description3: "A crude hatchet made with stick and stone. Combine it with a stick to make a hatchet. \n damage: 3",
+                description2: "A crude hatchet made with stick and stone. \n damage: 3",
+                description3: "A crude hatchet made with stick and stone. \n damage: 3",
                 equipable: {
                     isEquipable: true,
                     equipSlot: 'rightHand'

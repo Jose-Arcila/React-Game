@@ -32,8 +32,8 @@ export const MainWrapper = () => {
                 class: "savage",
                 description0: "A crude hatchet made with stick and stone. \n damage: 3",
                 description1: "A crude hatchet made with stick and stone. It could serve as more than a primitive weapon. \n damage: 3",
-                description2: "A crude hatchet made with stick and stone. Combine it with a stick to make a hatchet. \n damage: 3",
-                description3: "A crude hatchet made with stick and stone. Combine it with a stick to make a hatchet. \n damage: 3",
+                description2: "A crude hatchet made with stick and stone. \n damage: 3",
+                description3: "A crude hatchet made with stick and stone. \n damage: 3",
                 equipable: {
                     isEquipable: true,
                     equipSlot: 'rightHand'
@@ -65,7 +65,14 @@ export const MainWrapper = () => {
         },
         secondaryEvents: {
             woodChop: {
-                isChopping: false
+                isActive: false,
+                quantity: 0,
+                cooldown: 10
+            },
+            searching: {
+                isActive: false,
+                quantity: 0,
+                cooldown: 3
             }
         },
         navigatorButtons: {

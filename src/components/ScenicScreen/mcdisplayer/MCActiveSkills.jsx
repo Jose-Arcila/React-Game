@@ -24,7 +24,7 @@ export const MCActiveSkills = () => {
                 <ActiveSkill 
                     key={i}
                     name={u.name}
-                    description={eval('u.description' + u.level)}
+                    description={u[Function('return ' + '"' + 'description' + u.level + '"')()]}
                     level={u.level}
                 />
             )

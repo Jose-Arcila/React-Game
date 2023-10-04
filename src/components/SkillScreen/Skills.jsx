@@ -20,7 +20,7 @@ export const Skills = () => {
                     <SkillItem 
                         key={i}
                         name={u.name}
-                        description={eval('u.description' + u.level)}
+                        description={u[Function('return ' + '"' + 'description' + u.level + '"')()]}
                         label={u.label}
                         level={u.level}
                         cooldown={u.cooldown}

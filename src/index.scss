@@ -18,6 +18,12 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    width: 100%;
+}
+
+.universal-border {
+    border: 1px solid white;
+    border-radius: 4px;
 }
 
 body {
@@ -177,6 +183,7 @@ body {
         }
         .button-holder {
             display: flex;
+            padding: 0px 10px;
             width: 100%;
             align-items: center;
             justify-content: flex-start;
@@ -193,6 +200,9 @@ body {
                 border-radius: 4px;
                 height: 50px;
                 cursor: pointer;
+                &:hover {
+                    background-color: #313131;
+                }
                 &:active {
                     background-color: white;
                     color: var(--bg-color);
@@ -213,6 +223,46 @@ body {
                     background-color: white;
                     animation-name: search-bar;
                     animation-duration: 3s;
+                }
+                .button-description-box {
+                    border: 1px solid white;
+                    border-radius: 4px;
+                    padding: 15px 10px;
+                    position: absolute;
+                    background-color: var(--bg-color);
+                    left: 129px;
+                    top: 10px;
+                    max-width: 150px;
+                    width: 100%;
+                    text-transform: none;
+                    z-index: 1;
+                    h1 {
+                        font-size: 12px;
+                        font-weight: 500;
+                        margin: 0;
+                    }
+                    h2 {
+                        text-align: left;
+                        font-size: 12px;
+                        font-weight: 400;
+                    }
+                    p {
+                        margin: 0;
+                        text-align: left;
+                    }
+                }
+            }
+            .action-true {
+                &:before {
+                    content: " ";
+                    position: absolute;
+                    z-index: 1;
+                    top: -5px;
+                    left: -5px;
+                    right: -5px;
+                    bottom: -5px;
+                    border-radius: 4px;
+                    border: 1px dashed white;
                 }
             }
         }
@@ -422,6 +472,10 @@ body {
         h1 {
             margin: 5px 0px 20px;
         }
+        .fake-division {
+            margin-right: 30px;
+            border-radius: 4px;
+        }
         .inventory-space {
             border: 1px white solid;
             border-radius: 6px;
@@ -455,8 +509,8 @@ body {
                     border: 1px solid white;
                     padding: 10px;
                     border-radius: 4px;
-                    position: absolute;
-                    max-width: 300px;
+                    position: fixed;
+                    max-width: 600px;
                     width: 250%;
                     height: auto;
                     min-height: 100px;
@@ -467,8 +521,11 @@ body {
                     align-items: flex-start;
                     justify-content: space-between;
                     gap: 5px;
-                    z-index: 1;
-                    margin: 5px 0px 0 20px ;
+                    bottom: 18%;
+                    left: 8%;
+                    z-index: 2;
+                    margin: -30px 0px 0 0px;
+
                     &-item {
                         border: 1px solid white;
                         border-radius: 6px;
@@ -745,6 +802,29 @@ body {
     }
 }
 
+.craft-screen {
+    width: 100%;
+    height: 100%;
+    .columns-container {
+        width: 100%;
+        height: 100%;
+        max-height: calc(100% - 100px);
+        &-left {
+            max-width: 50%;
+            width: 100%;
+            height: 100%;
+            h2 {
+                margin: 20px 0 15px 0;
+            }
+            .available-crafts-craft {
+                width: 100%;
+                height: 200px;
+
+            }
+        }
+    }
+}
+
 @media (max-width: 1400px) {
     body {
         .mainWrapper {
@@ -753,9 +833,19 @@ body {
                 display: none;
             }
         }
+        .inventory-left .inventory-space .inventory-item .combine-screen {
+            left: 12%;
+            max-width: 40vw;
+        }
     }
+}
 
-
+@media (max-height: 900px) {
+    body {
+        .inventory-left .inventory-space .inventory-item .combine-screen {
+            bottom: 12%;
+        }
+    }
 }
 
 @keyframes search-bar {

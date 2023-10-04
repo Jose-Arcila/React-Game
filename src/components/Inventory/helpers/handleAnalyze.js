@@ -50,6 +50,6 @@ export const handleAnalyze=(skills, currentAppState, setCurrentAppState, giveexp
                 }
             })
             giveexp('analyze', currentAppState, setCurrentAppState)
-        }, eval("skills.analyze.cooldown" + skills.analyze.level));
+        }, skills.analyze[Function("return "+ "'" + "cooldown" + skills.analyze.level + "'")()]);
     }
 }

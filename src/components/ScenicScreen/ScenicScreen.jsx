@@ -23,7 +23,7 @@ export const ScenicScreen = () => {
 
     const changeShowButton=(condition1, condition2, target, target2, button)=>{
         if(condition1 && condition2){
-            let newTarget = eval(target)
+            let newTarget = target
             if(newTarget.includes(target2)){
                 setShowThisButton(state=>{
                     return{
@@ -40,12 +40,8 @@ export const ScenicScreen = () => {
     }
 
     useEffect(() => {
-        changeShowButton(eval(currentLocation.name === "DarkForest"), mcEquipment.rightHand.content.name, "mcEquipment.rightHand.content.type", "axe", 'lumberButton')
-    
-
+        changeShowButton(currentLocation.name === "DarkForest", mcEquipment.rightHand.content.name, mcEquipment.rightHand.content.type, "axe", 'lumberButton')
     }, [])
-    
-
 
     return (
         <div className="scenic-screen">

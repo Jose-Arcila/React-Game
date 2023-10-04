@@ -139,3 +139,44 @@ export const eventRelated = {
         })
     }
 }
+
+export const inventoryRelated = {
+    addItem: (id, name, setCurrentAppState, inventory, availableItems, rarity, type)=>{
+        // console.log(availableItems[rarity][type][id])
+        if(!inventory[name]){
+            setCurrentAppState(state=>{
+                return{
+                    ...state,
+                    inventory: {
+                        ...state.inventory,
+                        [name]: {
+                            ...availableItems[rarity][type][id],
+                            quantity: 1
+                        }
+                    },
+                    events: [
+                        `You have acquired ${name}.`,
+                        ...state.events
+                    ]
+                }
+            })
+        }else{
+            setCurrentAppState(state=>{
+                return{
+                    ...state,
+                    inventory: {
+                        ...state.inventory,
+                        [name]: {
+                            ...state.inventory[name],
+                            quantity: state.inventory[name].quantity +1
+                        }
+                    },
+                    events: [
+                        `You have acquired ${name}.`,
+                        ...state.events
+                    ]
+                }
+            })
+        }
+    }
+}

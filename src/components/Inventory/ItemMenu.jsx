@@ -6,9 +6,8 @@ import { InventoryItemDescription } from "./InventoryItemDescription"
 import { handleEquip } from "./helpers/handleEquip"
 import { handleAnalyze } from "./helpers/handleAnalyze"
 import { handleConsume } from "./helpers/handleConsume"
-import { CombineScreen } from "./CombineScreen"
 
-export const ItemMenu = ({itemMenuState, setItemMenuState}) => {
+export const ItemMenu = ({itemMenuState, setItemMenuState, isCombining, setIsCombining}) => {
 
     const {currentAppState, setCurrentAppState} = useContext(AppContext)
     const{ MainCharacter, inventory, fight } = currentAppState
@@ -24,12 +23,8 @@ export const ItemMenu = ({itemMenuState, setItemMenuState}) => {
         finishedAnalyzing: false,
         buttonDisabled: false
     })
-    const [isCombining, setIsCombining] = useState(false)
+    
     const {analyzing, finishedAnalyzing, buttonDisabled} = isAnalyzing
-
-    const handleCombine=()=>{
-        setIsCombining(true)
-    }
 
     const handleDiscard=()=>{
         if(inventory[name].quantity > 0) {
@@ -69,13 +64,8 @@ export const ItemMenu = ({itemMenuState, setItemMenuState}) => {
             }
             <button className="item-menu-button" onClick={()=>handleConsume(isConsumable, isHealing, damage, currentAppState, setCurrentAppState, name, label, inventory, MainCharacter, fight)}>Consume</button>
             <button className="item-menu-button" onClick={()=>handleEquip(isEquipable, currentAppState, setCurrentAppState, item, equipSlot, name, type, mcBaseAttack, damage, label)}>Equip</button>
-            <button className="item-menu-button" onClick={handleCombine}>Combine</button>
-            {
-                isCombining && <CombineScreen 
-                    firstItem={itemMenuState}
-                    inventory={inventory}
-                />
-            }
+            <button className="item-menu-button" onClick={()=>setIsCombining(true)}>Combine</button>
+            
             <button className="item-menu-button" onClick={handleDiscard}>Discard</button>
             
         </div>
