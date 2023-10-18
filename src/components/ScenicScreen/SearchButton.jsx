@@ -11,7 +11,7 @@ export const SearchButton = () => {
     const {search} = button
     const {skills} = MainCharacter
     const {searching} = secondaryEvents
-    const {turnOffAll, turnOnAll} = buttonRelated
+    const {turnOffAll, turnOnAll, deactivateAll} = buttonRelated
     const {activated, currentBar} = search
 
     const [isDescrip, setIsDescrip] = useState(false)
@@ -20,6 +20,7 @@ export const SearchButton = () => {
     if(MainCharacter.skills.search){
         skillWaittime = skills.search[Function("return " + "'" + 'cooldown' + skills.search.level + "'")()]
     }
+
 
     const giveRandomNumber100 =()=>{
         const randomNumberForSearch = Math.floor(Math.random() * 100);
@@ -35,6 +36,8 @@ export const SearchButton = () => {
         const randomNumberForSearch100 = giveRandomNumber100();
         const randomNumberForSearch10 = giveRandomNumber10();
         let searchLocation = currentLocation.subLocation
+
+        deactivateAll(secondaryEvents, setCurrentAppState, searching)
 
         if(!MainCharacter.skills.search) {
             setCurrentAppState(state=>{
@@ -63,7 +66,7 @@ export const SearchButton = () => {
                             }
                         },
                         events: [
-                            <i>You feel something strange. As if the simple action of searching had changed something inside you.</i>,
+                            `You feel something strange. As if the simple action of searching had changed something inside you.`,
                             ...state.events
                         ]
                     }
@@ -138,7 +141,6 @@ export const SearchButton = () => {
                     // object randomizer
                     if(randomNumberForSearch100 <= 80){
                         const randomObjectSelector = Object.values(searchLocation.availableItems.general)[randomNumberForSearch10]
-                        console.log(randomObjectSelector)
                         setCurrentAppState(state=>{
                             return{
                                 ...state,

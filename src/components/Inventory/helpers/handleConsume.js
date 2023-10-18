@@ -16,12 +16,17 @@ export const handleConsume=(isConsumable, isHealing, damage, currentAppState, se
         if(isHealing){
             if(MainCharacter.hp.value < MainCharacter.maxhp) {
                 if (!fight.isFighting) {
+                    const updatedHpValue = currentAppState.MainCharacter.hp.value + damage
+                    const newHealthValue = Math.min(updatedHpValue, MainCharacter.maxhp)
                     setCurrentAppState(state=> {
                         return {
                         ...state,
                         MainCharacter: {
                             ...state.MainCharacter,
-                            hprecovery: state.MainCharacter.hprecovery + damage
+                            hp: {
+                                ...state.MainCharacter.hp,
+                                value: state.MainCharacter.hp.value + damage
+                            }
 
                         },
                         events: [
@@ -29,17 +34,30 @@ export const handleConsume=(isConsumable, isHealing, damage, currentAppState, se
                             ...state.events
                         ]
                     }})
-                    setTimeout(() => {
-                        setCurrentAppState(state=> {
-                            return {
-                            ...state,
-                            MainCharacter: {
-                                ...state.MainCharacter,
-                                hprecovery: 0.1
+                    // setCurrentAppState(state=> {
+                    //     return {
+                    //     ...state,
+                    //     MainCharacter: {
+                    //         ...state.MainCharacter,
+                    //         hprecovery: state.MainCharacter.hprecovery + damage
+
+                    //     },
+                    //     events: [
+                    //         `You have eaten a ${label}. ${damage} health recovered`,
+                    //         ...state.events
+                    //     ]
+                    // }})
+                    // setTimeout(() => {
+                    //     setCurrentAppState(state=> {
+                    //         return {
+                    //         ...state,
+                    //         MainCharacter: {
+                    //             ...state.MainCharacter,
+                    //             hprecovery: 0.1
     
-                            }
-                        }})
-                    }, 1000);
+                    //         }
+                    //     }})
+                    // }, 1000);
                 }else {
                     const updatedHpValue = currentAppState.MainCharacter.hp.value + damage
                     const newHealthValue = Math.min(updatedHpValue, MainCharacter.maxhp)
@@ -49,7 +67,7 @@ export const handleConsume=(isConsumable, isHealing, damage, currentAppState, se
                         MainCharacter: {
                             ...state.MainCharacter,
                             hp: {
-                                ...hp,
+                                ...state.MainCharacter.hp,
                                 value: newHealthValue
                             }
 

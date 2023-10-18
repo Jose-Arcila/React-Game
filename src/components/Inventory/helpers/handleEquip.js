@@ -1,36 +1,36 @@
 export const handleEquip =(isEquip, currentAppState, setCurrentAppState, item, equipSlot, name, type, mcBaseAttack, damage, label)=>{
     if(isEquip){
-        setCurrentAppState(prevState=> {
+        setCurrentAppState(state=> {
             return {
-            ...prevState,
+            ...state,
             MainCharacter: {
-                ...prevState.MainCharacter,
+                ...state.MainCharacter,
                 equipment: {
-                    ...prevState.MainCharacter.equipment,
+                    ...state.MainCharacter.equipment,
                     [equipSlot]: {
-                        content: item,
-                        name: [equipSlot]
+                        content: {...item},
+                        name: equipSlot
                     }
                 }
             }
         }})
         if(type.includes('weapon')){
-            setCurrentAppState(prevState=>{
+            setCurrentAppState(state=>{
                 return {
-                    ...prevState,
+                    ...state,
                     MainCharacter: {
-                        ...prevState.MainCharacter,
+                        ...state.MainCharacter,
                         stats: {
-                            ...prevState.MainCharacter.stats,
+                            ...state.MainCharacter.stats,
                             phyAtk: {
-                                ...prevState.MainCharacter.stats.phyAtk,
+                                ...state.MainCharacter.stats.phyAtk,
                                 value: mcBaseAttack + damage
                             }
                         }
                     },
                     events: [
                         `${'You have equipped ' + label}`,
-                        ...prevState.events
+                        ...state.events
                     ]
                 }
             })

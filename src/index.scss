@@ -8,7 +8,6 @@
     }
 
 }
-
 #root {
     height: 100%;
     padding: 0;
@@ -268,12 +267,14 @@ body {
         }
         .disabled-search-button {
             background-color: #242424;
-            max-width: 100px;
+            max-width: 120px;
             width: 100%;
             text-transform: uppercase;
             padding: 10px 10px;
             border: 1px solid white;
             border-radius: 4px;
+            margin-right: 10px;
+            height: 50px;
             &-bar{
                 margin-top: 5px;
                 width: 0%;
@@ -421,6 +422,9 @@ body {
                             cursor: pointer;
                             hr {
                                 width: 100%;
+                            }
+                            &:hover {
+                                background-color: #242424;
                             }
                             &:active {
                                 background-color: white;
@@ -571,6 +575,9 @@ body {
                         // width: 100px;
                     }
                 }
+            }
+            .quantity-0 {
+                display: none;
             }
             .item-menu {
                 background-color: var(--bg-color);
@@ -809,6 +816,11 @@ body {
         width: 100%;
         height: 100%;
         max-height: calc(100% - 100px);
+        display: flex;
+        .column {
+            max-width: 50%;
+            width: 100%;
+        }
         &-left {
             max-width: 50%;
             width: 100%;
@@ -819,10 +831,161 @@ body {
             .available-crafts-craft {
                 width: 100%;
                 height: 200px;
+                box-sizing: border-box;
+                padding: 10px;
+                display: flex;
+                flex-wrap: wrap;
+                gap: 10px;
+                overflow-x: visible;
+                overflow-y: scroll;
+                .craft-item {
+                    height: 50px;
+                    width: 100%;
+                    box-sizing: border-box;
+                    display: flex;
+                    align-items: center;
+                    padding: 5px 10px;
+                    .craft-info {
+                        position: absolute;
+                        box-sizing: border-box;
+                        padding: 10px;
+                        min-height: 200px;
+                        height: auto;
+                        margin-right: 70px;
+                        max-width: 150px;
+                        width: 100%;
+                        display: flex;
+                        flex-direction: column;
+                        align-items: flex-start;
+                        background-color: var(--bg-color);
+                        z-index: 1;
+                        top: 30%;
+                        margin: 0px 0px 0px 70px;
+                        position: absolute;
+                        .needs-container {
+                            display: flex;
+                            width: 100%;
+                            &-column {
+                                width: 100%;
+                                max-width: 100%;
+                                display: flex;
+                                flex-direction: column;
+                            }
+                            .column-left {
+                                align-items: flex-start;
+                                justify-content: flex-start;
+                            }
+                            .column-right {
+                                justify-content: flex-start;
+                                align-items: flex-end;
+                            }
+                        }
+                        hr {
+                            width: 100%;
+                        }
+                        p {
+                            margin: 0;
+                            text-align: left;
+                        }
+                    }
+                    h1 {
+                        font-size: 16px;
+                        flex: 1;
+                    }
+                    &-button {
+                        background-color: var(--bg-color);
+                        font-size: 12px;
+                        padding: 5px 10px;
+                        box-sizing: border-box;
+                        cursor: pointer;
+                        &:hover {
+                            background-color: #313131;
+                        }
+                        &:active {
+                            background-color: white;
+                            color: var(--bg-color);
+                        }
+                    }
+                }
 
             }
         }
     }
+}
+
+.home-screen {
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    .columns-container {
+        height: calc(100% - 100px);
+        display: flex;
+        .columns-container-column {
+            width: 100%;
+            height: 100%;
+        }
+        .left-column {
+            display: flex;
+            flex-direction: column;
+            max-width: 30%;
+            .home-screen-house {
+                display: flex;
+                align-items: center;
+                margin: 10px 0px 20px 0px;
+                .home-announce {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    h3 {
+                        margin: 0;
+                    }
+                    hr {
+                        margin: 5px 0px;
+                        width: 100%;
+                    }
+                    p {
+                        margin: 0;
+                        font-size: 12px;
+                    }
+                }
+                .home-container {
+                    margin-left: 10px;
+                    border: 1px solid white;
+                    padding: 10px 10px;
+                    border-radius: 6px;
+                    margin-left: 30px;
+                    max-width: 70px;
+                    text-align: center;
+                    cursor: pointer;
+                    &:hover {
+                        background-color: #2e2e2e;
+                    }
+                    &:active {
+                        background-color: white;
+                        color: #242424;
+                    }
+                }
+            }
+            table {
+                width: 100%;
+                th {
+                    background-color: #242424;
+                    padding: 5px;
+                    box-sizing: border-box;
+                }
+                td {
+                    padding: 5px;
+                }
+                tr:nth-child(even) {
+                    background-color: #2e2e2e;
+                  }
+            }
+        }
+        .right-column {
+            max-width: 70%;
+        }
+    }
+
 }
 
 @media (max-width: 1400px) {

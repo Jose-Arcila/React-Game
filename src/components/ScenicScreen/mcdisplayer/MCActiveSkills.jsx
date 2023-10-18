@@ -2,7 +2,7 @@ import { useContext, useState } from "react"
 import { AppContext } from "../../../context/AppContext"
 import { ActiveSkill } from "./ActiveSkill"
 
-export const MCActiveSkills = () => {
+export const MCActiveSkills = ({setAreSkillsDisplayed}) => {
 
     const {currentAppState, setCurrentAppState} = useContext(AppContext)
     const {MainCharacter} = currentAppState
@@ -12,13 +12,11 @@ export const MCActiveSkills = () => {
     for (const [key, value] of Object.entries(skills)) {
         if(value.class === "active" && value.combatSkill === true){
             displaySkills[key] = value
-        }else{
-            console.log('nom')
         }
       }
 
   return (
-    <div className="active-skills-container">
+    <div className="active-skills-container" onMouseLeave={()=>setAreSkillsDisplayed(false)}>
         {
             Object.values(displaySkills).map((u, i)=>
                 <ActiveSkill 
@@ -26,6 +24,8 @@ export const MCActiveSkills = () => {
                     name={u.name}
                     description={u[Function('return ' + '"' + 'description' + u.level + '"')()]}
                     level={u.level}
+                    damage={u[Function('return ' + '"' + 'damage' + u.level + '"')()]}
+                    cost={u.cost}
                 />
             )
         }

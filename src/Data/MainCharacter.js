@@ -8,7 +8,8 @@ export const MainCharacter = {
     stamina: {
         name: 'sta',
         value: 10,
-        maxvalue: 10
+        maxvalue: 10,
+        recovery: 0.1
     },
     maxhp: 10,
     hprecovery: 0.1,
@@ -29,34 +30,42 @@ export const MainCharacter = {
     stats: {
         str: {
             name: 'str',
+            label: 'strength',
             value: 1
         },
         dex: {
             name: 'dex',
+            label: 'dexterity',
             value: 1
         },
         vit: {
             name: 'vit',
+            label: 'vitality',
             value: 1
         },
         int: {
             name: 'int',
+            label: 'intelligence',
             value: 1
         },
         wis: {
             name: 'wis',
+            label: 'wisdom',
             value: 1
         },
         lck: {
             name: 'lck',
+            label: 'luck',
             value: 1
         },
         con: {
             name: 'con',
+            label: 'constitution',
             value: 1
         },
         phyAtk: {
             name: 'phyAtk',
+            label: 'physical attack',
             value: 1
         }
     },

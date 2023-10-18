@@ -1,4 +1,4 @@
-import React, { useState} from 'react'
+import React, { useState, useEffect } from 'react'
 import { AppContext } from './context/AppContext'
 import { Navigator } from './components/Navigator'
 import { DisplayScreen } from './components/DisplayScreen'
@@ -7,6 +7,7 @@ import { MainCharacter } from './Data/MainCharacter.js'
 import { AvailableEnemies } from './Data/AvailableEnemies.js'
 import { HistoryDisplayer } from './components/HistoryDisplayer'
 import { availableSkills } from './Data/AvailableSkills'
+import { AvailableItems } from './Data/AvailableItems'
 
 export const MainWrapper = () => {
 
@@ -14,7 +15,10 @@ export const MainWrapper = () => {
         screenName: 'ScenicScreen',
         currentLocation: {
             ...Locations.DarkForest,
-            subLocation: Locations.DarkForest.subLocations.TwistedTree,
+            subLocation: {
+                ...Locations.DarkForest.subLocations.TwistedTree,
+                availableItems: {...Locations.DarkForest.subLocations.TwistedTree.availableItems}
+            },
             availableSubLocations: {
                 TwistedTree: {
                     ...Locations.DarkForest.subLocations.TwistedTree,
@@ -22,27 +26,14 @@ export const MainWrapper = () => {
                 }
             }
         },
-        inventory: {
-            // test only
-            hatchet: {
-                id: 'A1A2A2',
-                label: "Hatchet",
-                name: 'hatchet',
-                type: "cutting weapon, axe",
-                class: "savage",
-                description0: "A crude hatchet made with stick and stone. \n damage: 3",
-                description1: "A crude hatchet made with stick and stone. It could serve as more than a primitive weapon. \n damage: 3",
-                description2: "A crude hatchet made with stick and stone. \n damage: 3",
-                description3: "A crude hatchet made with stick and stone. \n damage: 3",
-                equipable: {
-                    isEquipable: true,
-                    equipSlot: 'rightHand'
-                },
-                quantity: 1,
-                damage: 3,
-                consumable: false,
-                src: ''
-            }
+        inventory: {       
+        },
+        furnishing: {},
+        house: {
+            name: 'Twisted Tree',
+            space: 5,
+            modifications: {},
+            takenSpace: 0
         },
         prompts: {
             primaryPrompt: 'Your eyes feel strangely heavy as you pry them open. As you stand to your feet you look around, stranged, and find yourself surrounded by nothing but wilderness.',
@@ -50,8 +41,12 @@ export const MainWrapper = () => {
         }, 
         MainCharacter: {...MainCharacter},
         AvailableEnemies: {...AvailableEnemies},
-        availableSkills,
-        Locations,
+        availableSkills: {
+            ...availableSkills
+        },
+        locations: {
+            ...Locations
+        },
         countThings: {
             bluntAttacks: 0,
             pierceAttacks: 0,
@@ -118,6 +113,34 @@ export const MainWrapper = () => {
             'You wake up. An eerie sensation permeates the air.'
         ]
     });
+
+    function stringify(obj) {
+        let cache = [];
+        let str = JSON.stringify(obj, function(key, value) {
+          if (typeof value === "object" && value !== null) {
+            if (cache.indexOf(value) !== -1) {
+              // Circular reference found, discard key
+              return;
+            }
+            // Store value in our collection
+            cache.push(value);
+          }
+          return value;
+        });
+        cache = null; // reset the cache
+        return str;
+      }
+
+    useEffect(() => {
+      const data = window.localStorage.getItem('CURRENT_APP_STATE')
+      if (data !== null ) setCurrentAppState(JSON.parse(data))
+      console.log(data)
+    
+    }, [])
+    
+    useEffect(() => {
+        window.localStorage.setItem('CURRENT_APP_STATE', JSON.stringify(currentAppState));
+    }, [currentAppState]);
     
     return (
         <AppContext.Provider value={{currentAppState, setCurrentAppState, Locations}}>

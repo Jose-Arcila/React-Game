@@ -8,8 +8,7 @@ export const EquippedItemDescription = ({item}) => {
             {/* <p>Rarity: {content.type}</p> */}
 
             {
-                type.includes('weapon') === true ? <div><p>type: Weapon</p> <p>damage: {damage}</p></div> :
-                console.log('tarata')
+                type.includes('weapon') && <div><p>type: Weapon</p> <p>damage: {damage}</p></div>
             }
 
             

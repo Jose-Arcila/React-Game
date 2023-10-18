@@ -1,8 +1,23 @@
-import { enemyAttacks } from "./EnemyAttacks"
 import { AvailableItems } from "./AvailableItems"
 
-const {oneStar} = AvailableItems
-const { attack } = enemyAttacks
+const { oneStar } = AvailableItems
+
+const attack= {
+    effect: (damage, setCurrentAppState, MainCharacter)=>{
+        setCurrentAppState(state=>{
+            return {
+                ...state,
+                MainCharacter: {
+                    ...state.MainCharacter,
+                    hp: {
+                        ...state.MainCharacter.hp,
+                        value: MainCharacter.hp.value - damage
+                    }
+                }
+            }
+        })
+    },
+}
 
 export const AvailableEnemies = {
     oneStar: {
@@ -10,7 +25,7 @@ export const AvailableEnemies = {
             slime: {
                 atk: 1,
                 def: 1,
-                agi: 1,
+                agi: 0,
                 hp: 5,
                 maxhp: 5,
                 mp: 3,
@@ -30,7 +45,7 @@ export const AvailableEnemies = {
                         damage: 1
                     }
                 },
-                prompt: 'As you prance calmly through the forest, your foot gets stuck on a slimy, sticky substance. You look around, and a bouncing liquid sphere is moving towards you. Slowly. Very slowly.',
+                prompt: 'As you prance calmly through the forest, your foot gets stuck on a slimy, sticky substance. You look around, and see a bouncing liquid sphere moving towards you. Slowly. Very slowly.',
                 name: 'Slime',
                 drops: {
                     slime: oneStar.monsterDrops.slimyLiquid
@@ -117,11 +132,12 @@ export const AvailableEnemies = {
                         damage: 1
                     }
                 },
-                prompt: 'A rumbling calls your attention soon enough, and you manage to dodge out of the way as a massive animal hurls all of its weight towards you. It turns around, looking at you with a fierce intent.',
+                prompt: 'A rumbling calls your attention as you walk, and your hairs stand on end. You manage to dodge out of the way as a massive animal hurls all of its weight towards you. It turns around, looking at you with a fierce intent.',
                 name: 'Boar',
                 drops: {
                     brokenTusk: oneStar.monsterDrops.brokenTusk,
-                    meat: oneStar.monsterDrops.meat
+                    meat: oneStar.monsterDrops.meat,
+                    crudeLeather: oneStar.monsterDrops.crudeLeather
                 }
             },
             deer: {

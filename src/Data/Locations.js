@@ -12,10 +12,10 @@ export const Locations = {
                 primaryPrompt: "You are back at the starting point. The crooks and twists of that old faded tree seem nostalgic.",
                 secondaryPrompt: 'A twisted tree laying low beneath the canopies is your only reference.',
                 availableItems: {
-                    general: AvailableItems.oneStar.general
+                    general: {...AvailableItems.oneStar.general}
                 },
                 availableEnemies: {
-                    general: AvailableEnemies.oneStar.general
+                    general: {...AvailableEnemies.oneStar.general}
                 }
             },
             RuinedFountain: {

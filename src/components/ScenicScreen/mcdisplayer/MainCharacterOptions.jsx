@@ -7,12 +7,15 @@ import { MCActiveSkills } from './MCActiveSkills'
 export const MainCharacterOptions = () => {
 
     const {currentAppState, setCurrentAppState} = useContext(AppContext)
-    const {MainCharacter, fight, countThings, button} = currentAppState
+    const {MainCharacter, fight, countThings, button, secondaryEvents} = currentAppState
     const {currentTurn, currentEnemy} = fight
     const {stats} = MainCharacter
     const {changeCountThings} = countRelated
     const {addSkill} = skillsRelated
     const {turnOnAll, turnOffAll} = buttonRelated
+
+    const getRandomEnemyAttack = Math.floor(Math.random() * Object.values(currentEnemy.skills).length);
+    const randomAttackSelector = Object.values(currentEnemy.skills)[getRandomEnemyAttack]
 
     const [areSkillsDisplayed, setAreSkillsDisplayed] = useState(false)
 
@@ -45,6 +48,21 @@ export const MainCharacterOptions = () => {
     
     }, [MainCharacter.hp.value])
 
+    const attackEffect=(damage, setCurrentAppState, MainCharacter)=>{
+        setCurrentAppState(state=>{
+            return {
+                ...state,
+                MainCharacter: {
+                    ...state.MainCharacter,
+                    hp: {
+                        ...state.MainCharacter.hp,
+                        value: MainCharacter.hp.value - damage
+                    }
+                }
+            }
+        })
+    }
+
     const handleFlee =()=>{
         let chanceOfFleeing = (stats.dex.value + (currentEnemy.agi - stats.dex.value)) + (Math.floor(Math.random() * stats.dex.value))
         if (chanceOfFleeing > (currentEnemy.agi * 1.5)){
@@ -65,7 +83,7 @@ export const MainCharacterOptions = () => {
             })
             turnOnAll(button, setCurrentAppState)
         }else {
-            Object.values(currentEnemy.skills)[0].effect(currentEnemy.atk, setCurrentAppState, MainCharacter);
+            attackEffect(randomAttackSelector.damage, setCurrentAppState, MainCharacter);
             setCurrentAppState(state=>{
                 return{
                     ...state,
@@ -93,7 +111,19 @@ export const MainCharacterOptions = () => {
                     if(countThings.bluntAttacks > 9 && !MainCharacter.skills.slam){
                         addSkill('slam', setCurrentAppState)
                     }  
+                }else if(isThereItem.type.includes('cutting')){
+                    changeCountThings('slashingAttacks', setCurrentAppState)
+                    console.log(countThings)
+                    if(countThings.slashingAttacks > 9 && !MainCharacter.skills.slam){
+                        addSkill('slam', setCurrentAppState)
+                    }
+                    if(isThereItem.type.includes('axe')){
+                        if(secondaryEvents.woodChop.quantity > 9 && !MainCharacter.skills.chop){
+                            addSkill('chop', setCurrentAppState)
+                        }
+                    }
                 }
+                
             }else{
                 changeCountThings('fistAttacks', setCurrentAppState)
                 console.log(countThings)
@@ -131,7 +161,9 @@ export const MainCharacterOptions = () => {
             {
                 areSkillsDisplayed
                 &&
-                <MCActiveSkills />
+                <MCActiveSkills 
+                    setAreSkillsDisplayed={setAreSkillsDisplayed}
+                />
             }
 
         </div>

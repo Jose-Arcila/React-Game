@@ -41,7 +41,7 @@ export const CombineScreenItem = ({label, id, quantity, firstItem, name, setIsCo
                                 }
                             },
                             events: [
-                                <i>A torrent of information floods your mind. Blueprints and instructions you are sure you didn't know, but are now nested in your brain.</i>,
+                                `A torrent of information floods your mind. Blueprints and instructions you are sure you didn't know, but are now nested in your brain.`,
                                 ...state.events
                             ]
                         }

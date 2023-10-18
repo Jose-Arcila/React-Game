@@ -27,6 +27,7 @@ export const HistoryDisplayer = () => {
                         <li key={i} className="history-displayer-list-item">
                             {u}
                         </li>
+                        
                     )
                 }
 

@@ -37,13 +37,28 @@ export const EnemyDisplayer = () => {
                 }
             })
         }
-    }, [currentEnemy])
+    }, [])
+
+    const attackEffect=(damage, setCurrentAppState, MainCharacter)=>{
+        setCurrentAppState(state=>{
+            return {
+                ...state,
+                MainCharacter: {
+                    ...state.MainCharacter,
+                    hp: {
+                        ...state.MainCharacter.hp,
+                        value: MainCharacter.hp.value - damage
+                    }
+                }
+            }
+        })
+    }
 
     useEffect(() => {
         if(currentTurn === 'enemy'){
             if(0 < currentEnemy.hp){
                 setTimeout(() => {
-                    randomAttackSelector.effect(randomAttackSelector.damage, setCurrentAppState, MainCharacter);
+                    attackEffect(randomAttackSelector.damage, setCurrentAppState, MainCharacter);
                     setCurrentAppState(state=>{
                         return{
                             ...state,

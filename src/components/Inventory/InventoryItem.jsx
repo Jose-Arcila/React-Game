@@ -48,7 +48,7 @@ export const InventoryItem = ({itemName, itemType, itemSource, itemQuantity, ite
 
 
     return (
-        <div className={"inventory-item " + itemType} onClick={handleItemMenu}>
+        <div className={"inventory-item " + itemType + " quantity-" + itemQuantity} onClick={handleItemMenu}>
 
             { itemMenuState.exist && <ItemMenu 
                 itemMenuState={itemMenuState}

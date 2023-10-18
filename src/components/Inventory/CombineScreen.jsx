@@ -8,7 +8,6 @@ export const CombineScreen = ({firstItem, inventory, setIsCombining}) => {
       function handleClickOutside(event) {
         if (ref.current && !ref.current.contains(event.target)) {
           setIsCombining(false)
-          console.log(ref.current)
         }
       }
 

@@ -260,12 +260,14 @@ body .mainWrapper .navigator__button:active p, body .mainWrapper .navigator__but
 }
 .scenic-screen .search-button-container .disabled-search-button {
   background-color: #242424;
-  max-width: 100px;
+  max-width: 120px;
   width: 100%;
   text-transform: uppercase;
   padding: 10px 10px;
   border: 1px solid white;
   border-radius: 4px;
+  margin-right: 10px;
+  height: 50px;
 }
 .scenic-screen .search-button-container .disabled-search-button-bar {
   margin-top: 5px;
@@ -415,6 +417,9 @@ body .mainWrapper .navigator__button:active p, body .mainWrapper .navigator__but
 .scenic-screen-action-container .mc-displayer-bottom-row .mc-displayer-options .active-skills-container .active-skill hr {
   width: 100%;
 }
+.scenic-screen-action-container .mc-displayer-bottom-row .mc-displayer-options .active-skills-container .active-skill:hover {
+  background-color: #242424;
+}
 .scenic-screen-action-container .mc-displayer-bottom-row .mc-displayer-options .active-skills-container .active-skill:active {
   background-color: white;
 }
@@ -557,6 +562,9 @@ body .mainWrapper .navigator__button:active p, body .mainWrapper .navigator__but
 }
 .inventory-left .inventory-space .inventory-item-content img {
   height: 50px;
+}
+.inventory-left .inventory-space .quantity-0 {
+  display: none;
 }
 .inventory-left .inventory-space .item-menu {
   background-color: var(--bg-color);
@@ -790,6 +798,11 @@ body .mainWrapper .navigator__button:active p, body .mainWrapper .navigator__but
   width: 100%;
   height: 100%;
   max-height: calc(100% - 100px);
+  display: flex;
+}
+.craft-screen .columns-container .column {
+  max-width: 50%;
+  width: 100%;
 }
 .craft-screen .columns-container-left {
   max-width: 50%;
@@ -802,6 +815,156 @@ body .mainWrapper .navigator__button:active p, body .mainWrapper .navigator__but
 .craft-screen .columns-container-left .available-crafts-craft {
   width: 100%;
   height: 200px;
+  box-sizing: border-box;
+  padding: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  overflow-x: visible;
+  overflow-y: scroll;
+}
+.craft-screen .columns-container-left .available-crafts-craft .craft-item {
+  height: 50px;
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  padding: 5px 10px;
+}
+.craft-screen .columns-container-left .available-crafts-craft .craft-item .craft-info {
+  position: absolute;
+  box-sizing: border-box;
+  padding: 10px;
+  min-height: 200px;
+  height: auto;
+  margin-right: 70px;
+  max-width: 150px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  background-color: var(--bg-color);
+  z-index: 1;
+  top: 30%;
+  margin: 0px 0px 0px 70px;
+  position: absolute;
+}
+.craft-screen .columns-container-left .available-crafts-craft .craft-item .craft-info .needs-container {
+  display: flex;
+  width: 100%;
+}
+.craft-screen .columns-container-left .available-crafts-craft .craft-item .craft-info .needs-container-column {
+  width: 100%;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.craft-screen .columns-container-left .available-crafts-craft .craft-item .craft-info .needs-container .column-left {
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.craft-screen .columns-container-left .available-crafts-craft .craft-item .craft-info .needs-container .column-right {
+  justify-content: flex-start;
+  align-items: flex-end;
+}
+.craft-screen .columns-container-left .available-crafts-craft .craft-item .craft-info hr {
+  width: 100%;
+}
+.craft-screen .columns-container-left .available-crafts-craft .craft-item .craft-info p {
+  margin: 0;
+  text-align: left;
+}
+.craft-screen .columns-container-left .available-crafts-craft .craft-item h1 {
+  font-size: 16px;
+  flex: 1;
+}
+.craft-screen .columns-container-left .available-crafts-craft .craft-item-button {
+  background-color: var(--bg-color);
+  font-size: 12px;
+  padding: 5px 10px;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+.craft-screen .columns-container-left .available-crafts-craft .craft-item-button:hover {
+  background-color: #313131;
+}
+.craft-screen .columns-container-left .available-crafts-craft .craft-item-button:active {
+  background-color: white;
+  color: var(--bg-color);
+}
+
+.home-screen {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+}
+.home-screen .columns-container {
+  height: calc(100% - 100px);
+  display: flex;
+}
+.home-screen .columns-container .columns-container-column {
+  width: 100%;
+  height: 100%;
+}
+.home-screen .columns-container .left-column {
+  display: flex;
+  flex-direction: column;
+  max-width: 30%;
+}
+.home-screen .columns-container .left-column .home-screen-house {
+  display: flex;
+  align-items: center;
+  margin: 10px 0px 20px 0px;
+}
+.home-screen .columns-container .left-column .home-screen-house .home-announce {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.home-screen .columns-container .left-column .home-screen-house .home-announce h3 {
+  margin: 0;
+}
+.home-screen .columns-container .left-column .home-screen-house .home-announce hr {
+  margin: 5px 0px;
+  width: 100%;
+}
+.home-screen .columns-container .left-column .home-screen-house .home-announce p {
+  margin: 0;
+  font-size: 12px;
+}
+.home-screen .columns-container .left-column .home-screen-house .home-container {
+  margin-left: 10px;
+  border: 1px solid white;
+  padding: 10px 10px;
+  border-radius: 6px;
+  margin-left: 30px;
+  max-width: 70px;
+  text-align: center;
+  cursor: pointer;
+}
+.home-screen .columns-container .left-column .home-screen-house .home-container:hover {
+  background-color: #2e2e2e;
+}
+.home-screen .columns-container .left-column .home-screen-house .home-container:active {
+  background-color: white;
+  color: #242424;
+}
+.home-screen .columns-container .left-column table {
+  width: 100%;
+}
+.home-screen .columns-container .left-column table th {
+  background-color: #242424;
+  padding: 5px;
+  box-sizing: border-box;
+}
+.home-screen .columns-container .left-column table td {
+  padding: 5px;
+}
+.home-screen .columns-container .left-column table tr:nth-child(even) {
+  background-color: #2e2e2e;
+}
+.home-screen .columns-container .right-column {
+  max-width: 70%;
 }
 
 @media (max-width: 1400px) {

@@ -112,6 +112,26 @@ export const buttonRelated = {
                 }
             })
         }
+    },
+    deactivateAll: (valueHere, setCurrentAppState, happening)=>{
+        for (const [key, value] of Object.entries(valueHere)) {
+            setCurrentAppState(state=>{
+                return{
+                    ...state,
+                    secondaryEvents: {
+                        ...state.secondaryEvents,
+                        [key]: {
+                            ...state.secondaryEvents[key],
+                            isActive: false
+                        },
+                        [happening]: {
+                            ...state.secondaryEvents[happening],
+                            isActive: true
+                        }
+                    }
+                }
+            })
+        }
     }
 }
 
@@ -131,10 +151,10 @@ export const eventRelated = {
         setCurrentAppState(state=>{
             return{
                 ...state,
-                prompts: [
+                prompts: {
                     ...state.prompts,
-                    
-                ]
+                    primaryPrompt: prompt
+                }
             }
         })
     }
@@ -142,7 +162,6 @@ export const eventRelated = {
 
 export const inventoryRelated = {
     addItem: (id, name, setCurrentAppState, inventory, availableItems, rarity, type)=>{
-        // console.log(availableItems[rarity][type][id])
         if(!inventory[name]){
             setCurrentAppState(state=>{
                 return{
@@ -178,5 +197,115 @@ export const inventoryRelated = {
                 }
             })
         }
+    },
+    addCraftItem: (name, setCurrentAppState, inventory, availableCrafts, level)=>{
+        if(!inventory[name]){
+            setCurrentAppState(state=>{
+                return{
+                    ...state,
+                    inventory: {
+                        ...state.inventory,
+                        [name]: {
+                            ...availableCrafts[level][name],
+                            quantity: 1
+                        }
+                    }
+                }
+            })
+        }else{
+            setCurrentAppState(state=>{
+                return{
+                    ...state,
+                    inventory: {
+                        ...state.inventory,
+                        [name]: {
+                            ...state.inventory[name],
+                            quantity: state.inventory[name].quantity +1
+                        }
+                    }
+                }
+            })
+        }
+    },
+    removeItem: (name, setCurrentAppState)=>{
+        setCurrentAppState(state=>{
+            return{
+                ...state,
+                inventory: {
+                    ...state.inventory,
+                    [name]: {
+                        ...state.inventory[name],
+                        quantity: state.inventory[name].quantity-1
+                    }
+                },
+            }
+        })
+    },
+    removeCraftItem: (name, setCurrentAppState, quantity)=>{
+        setCurrentAppState(state=>{
+            return{
+                ...state,
+                inventory: {
+                    ...state.inventory,
+                    [name]: {
+                        ...state.inventory[name],
+                        quantity: state.inventory[name].quantity- quantity
+                    }
+                },
+            }
+        })
+    },
+    addFurniture: (name, setCurrentAppState, furnishing, availableCrafts, type)=>{
+        if(!furnishing[name]){
+            setCurrentAppState(state=>{
+                return{
+                    ...state,
+                    furnishing: {
+                        ...state.furnishing,
+                        [name]: {
+                            ...availableCrafts[type][name],
+                            quantity: 1
+                        }
+                    },
+                }
+            })
+        }else{
+            setCurrentAppState(state=>{
+                return{
+                    ...state,
+                    furnishing: {
+                        ...state.furnishing,
+                        [name]: {
+                            ...state.furnishing[name],
+                            quantity: state.furnishing[name].quantity +1
+                        }
+                    }
+                }
+            })
+        }
+    }
+}
+
+export const statRelated = {
+    changeStat: (stat, setCurrentAppState, summedValue, label)=>{
+        setCurrentAppState(state=>{
+            return{
+                ...state,
+                MainCharacter: {
+                    ...state.MainCharacter,
+                    stats: {
+                        ...state.MainCharacter.stats,
+                        [stat]: {
+                            ...state.MainCharacter.stats[stat],
+                            value: state.MainCharacter.stats[stat].value + summedValue
+                        }
+                    }
+                },
+                events: [
+                    `your ${label} has risen!`,
+                    ...state.events
+                ]
+            }
+        })
     }
 }
