@@ -45,7 +45,7 @@ export const AvailableEnemies = {
                         damage: 1
                     }
                 },
-                prompt: 'As you prance calmly through the forest, your foot gets stuck on a slimy, sticky substance. You look around, and see a bouncing liquid sphere moving towards you. Slowly. Very slowly.',
+                prompt: 'As you stroll calmly through the forest, your foot gets stuck on a slimy, sticky substance. You look around with a disgusted expression, and see a bouncing liquid sphere moving towards you. Slowly. Very slowly.',
                 name: 'Slime',
                 drops: {
                     slime: oneStar.monsterDrops.slimyLiquid
@@ -103,7 +103,7 @@ export const AvailableEnemies = {
                         damage: 1
                     }
                 },
-                prompt: "A swing of the vines and a small shadow lands in front of you. It opens it's mouth to bare a set of horrifying teeth, and approaches you with ill intent, screaming.",
+                prompt: "The branches above your head creek as the vines swing from side to side, and a small shadow lands in front of you. It opens it's mouth to bare a set of horrifying teeth, and approaches you with ill intent, screaming.",
                 name: 'Monkey',
                 drops: {
                     fermentedFruit: oneStar.monsterDrops.fermentedFruit,
@@ -132,7 +132,7 @@ export const AvailableEnemies = {
                         damage: 1
                     }
                 },
-                prompt: 'A rumbling calls your attention as you walk, and your hairs stand on end. You manage to dodge out of the way as a massive animal hurls all of its weight towards you. It turns around, looking at you with a fierce intent.',
+                prompt: 'A rumbling calls your attention as you walk, and your hairs stand on end. You manage to dodge out of the way as a massive animal hurls all of its weight towards you, letting it crash against a tree. It turns around, looking at you with fierce intent.',
                 name: 'Boar',
                 drops: {
                     brokenTusk: oneStar.monsterDrops.brokenTusk,
@@ -163,7 +163,7 @@ export const AvailableEnemies = {
                         damage: 1
                     }
                 },
-                prompt: 'You set your eyes on the distance and see a large patch of brown. As you walk closer, you notice a pair of antlers that raise in response to your sudden arrival.',
+                prompt: 'You set your eyes on the distance and see a large shadow moving through the bushes. As you walk closer, you notice a pair of antlers that raise in response to your sudden arrival.',
                 name: 'deer',
                 drops: {
                     meat: oneStar.monsterDrops.meat,
@@ -192,7 +192,7 @@ export const AvailableEnemies = {
                         damage: 1
                     }
                 },
-                prompt: 'The sudden sound of a howling beast makes your hairs stand on end. Fearing the worst you look around you, and as expected, gaze upon a single, small wolf baring its fangs at you.',
+                prompt: 'The sudden sound of a howling beast makes a cold shiver run down your spine. Fearing the worst, you look around, and as expected, encounter a small wolf baring its fangs at you.',
                 name: 'Wolf',
                 drops: {
                     brokenFangs: oneStar.monsterDrops.brokenFangs,
@@ -222,7 +222,7 @@ export const AvailableEnemies = {
                         damage: 1
                     }
                 },
-                prompt: "You go in to collect a few hanging berrires, but your hand is met by a ferocious slap. Uncapable of understanding what's going on, you have no choice but to fight as the bush begins moving.",
+                prompt: "You go into the thicket to collect a few hanging berries, but your hand is met by a ferocious slap. Uncapable of understanding what's going on, you have no choice but to fight as the bushes begins moving.",
                 name: 'Living Shrub',
                 drops: {
                     stick: oneStar.general.stick,
@@ -253,7 +253,7 @@ export const AvailableEnemies = {
                         damage: 1
                      }
                 },
-                prompt: 'A constant crawling and a sizzling sound can be heard from the trees. You step away looking to escape, but fall on a sticky net instead. The host slowly approaches you, salivating.',
+                prompt: 'Crawling and a sizzling can be heard from the trees around you. You step away looking to escape, but fall on a sticky net instead. The host slowly approaches you, salivating.',
                 name: 'Arachnid',
                 drops: {
                     lowGradeSilk: oneStar.monsterDrops.lowGradeSilk
@@ -297,7 +297,7 @@ export const AvailableEnemies = {
                         damage: 1
                     },
                 },
-                prompt: 'A sudden buzz passes you by- right before a few more pass right beside your ear. Soon enough, a myriad of insects is heading your way, their stingers at the ready.',
+                prompt: 'A sudden buzz passes you by- right before a few more pass right beside your ear. Soon enough, a myriad of insects is heading your way, their stings at the ready.',
                 name: 'Insect Swarm',
                 drops: {
                     dullInsect: oneStar.general.dullInsect
